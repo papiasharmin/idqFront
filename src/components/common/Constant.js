@@ -14,7 +14,7 @@ export const CHAIN_ID = '80001';
 // rpc URL 
 export const RPC_URL = `https://polygon-mumbai.g.alchemy.com/v2/${process.env.PROJECT_ID}`;//`https://eth-goerli.g.alchemy.com/v2/${PROJECT_ID}`;
 // API Base URL
-export const baseURL = 'http://localhost:3001';
+export const baseURL = 'https://idq-fufksazl0-papiasharmin.vercel.app';
 // PINTA API Base URL
 export const PINTABaseURL = 'https://api.pinata.cloud';
 // PINTA Gateway API Base URL
