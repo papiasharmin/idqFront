@@ -41,7 +41,7 @@ function App() {
   const connectWalletAction = async () => {
     try {
       // call createContractObject function
-      const signer  = await connectWallet(); //INSTEAD OF USING BLOCKTO CREAT AN ACOUNT IN  METAMAK AND USE IT 
+      const signer  = "0x202E34b639EEE7377aB5d80606f933b8c9c7Bae6";//await connectWallet(); //INSTEAD OF USING BLOCKTO CREAT AN ACOUNT IN  METAMAK AND USE IT 
       
       setCurrentAccount(signer);
     } catch (error) {

@@ -3,7 +3,7 @@ import MenuItem from "@mui/material/MenuItem/MenuItem";
 import Select from "@mui/material/Select";
 import { useTheme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography/Typography";
-import { BrowserQRCodeReader } from "@zxing/browser";
+//import { BrowserQRCodeReader } from "@zxing/browser";
 import React, { useEffect, useRef, useState } from "react";
 import './QrCodeReader.css';
 
@@ -38,19 +38,19 @@ const QrCodeReader = ({ onRead, setOpen }) => {
     
       useEffect(() => {
             mountedRef.current = true;
-            const codeReader = new BrowserQRCodeReader(undefined, 'video');
-            setDevicesList();
+            // const codeReader = new BrowserQRCodeReader(undefined, 'video');
+            // setDevicesList();
 
-            codeReader.decodeFromVideoDevice(undefined, videoRef.current, function (result, _, controls) {
-                  if (mountedRef.current === false) {
-                        controls.stop();
-                        return;
-                  }
-                  if (typeof result !== "undefined") {
-                        controls.stop();
-                        onRead(result);
-                  }
-            });
+            // codeReader.decodeFromVideoDevice(undefined, videoRef.current, function (result, _, controls) {
+            //       if (mountedRef.current === false) {
+            //             controls.stop();
+            //             return;
+            //       }
+            //       if (typeof result !== "undefined") {
+            //             controls.stop();
+            //             onRead(result);
+            //       }
+            // });
 
             return function cleanup() {
                   mountedRef.current = false;
