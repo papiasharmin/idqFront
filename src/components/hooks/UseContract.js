@@ -2,7 +2,7 @@
  * スマートコントラクトやウォレット接続などのWeb3関連の処理をまとめたhookコンポーネントファイル
  */
 import BloctoSDK from '@blocto/sdk';
-import Web3 from 'web3';
+//import Web3 from 'web3';
 import MultiSigWallet from './../../contracts/MultiSigWallet.json';
 import MyToken from './../../contracts/MyToken.json';
 import WalletFactory from './../../contracts/WalletFactoryV4.json';
@@ -11,11 +11,11 @@ import { ethers } from 'ethers';
 /**
  * getProvider メソッド
  */
-export const getProvider = () => {
-      // get provider
-      const provider = new Web3(`https://polygon-mumbai.g.alchemy.com/v2/EgiLkcIuRCG4PwoZiyRTVkYMcZrT8ynP`);
-      return provider;
-};
+// export const getProvider = () => {
+//       // get provider
+//       const provider = new Web3(`https://polygon-mumbai.g.alchemy.com/v2/EgiLkcIuRCG4PwoZiyRTVkYMcZrT8ynP`);
+//       return provider;
+// };
 
 /**
  * createContractObject メソッド

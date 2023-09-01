@@ -13,7 +13,7 @@ import TableRow from '@mui/material/TableRow';
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import superAgent from 'superagent';
-import Web3 from "web3";
+//import Web3 from "web3";
 import ActionButton from '../../common/ActionButton';
 import LoadingIndicator from '../../common/LoadingIndicator';
 import './../../../assets/css/App.css';

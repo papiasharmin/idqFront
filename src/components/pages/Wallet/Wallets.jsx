@@ -11,7 +11,7 @@ import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import React, { useEffect, useState } from "react";
 import superAgent from 'superagent';
-import Web3 from "web3";
+
 import WalletDialog from '../../common/Dialog';
 import LoadingIndicator from '../../common/LoadingIndicator';
 import './../../../assets/css/App.css';
