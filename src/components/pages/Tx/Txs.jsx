@@ -97,10 +97,10 @@ const Txs = (props) => {
     const init = async() => {
         // locationから取得する。
         const addr = location.state.addr;
-
+        console.log('ADDR',addr)
         try { 
             // トランザクションの情報を取得する。
-            const transactions = await getTxs();
+            const transactions = await getTxs("0x202E34b639EEE7377aB5d80606f933b8c9c7Bae6");
             // コントラクトとアカウントの情報をステート変数に格納する。
             setContract("");
             setAccount(currentAccount);
@@ -117,7 +117,7 @@ const Txs = (props) => {
      */
     const createAction = async() => {
         // 送金額をETHに変換する。
-        const sendValue = Web3.utils.toWei(value);
+        const sendValue = 0//Web3.utils.toWei(value);
 
         try {
             setIsLoading(true);    
@@ -127,7 +127,7 @@ const Txs = (props) => {
                 .post(baseURL + '/api/wallet/submit')
                 .query({
                     to: to,
-                    value: sendValue,
+                    value: value,
                     data: inputData,
                     address: wallet
                 })

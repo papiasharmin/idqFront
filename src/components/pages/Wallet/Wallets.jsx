@@ -119,14 +119,14 @@ const Wallets = (props) => {
             setOpen(false);
             setIsLoading(true);
             // 入金額を16進数に変換する。
-            const value = Web3.utils.toWei(amount.toString());
+            const value = 0//Web3.utils.toWei(amount.toString());
             
             // 償却用APIを呼び出す
             superAgent
                 .post(baseURL + '/api/burnToken')
                 .query({
                     to: currentAccount,
-                    amount: value,
+                    amount: amount,
                     walletAddr: depositAddr
                 })
                 .end(async(err, res) => {

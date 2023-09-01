@@ -88,7 +88,7 @@ const TxTable = (props) => {
                         return (
                             <TableCell key={column.id} align={column.align}>
                                 {/* ETHに変換して出力する。 */}
-                                {Web3.utils.fromWei(row.value, 'ether')}
+                                {0}
                             </TableCell>
                         )
                     } 
@@ -126,3 +126,5 @@ const TxTable = (props) => {
 };
 
 export default TxTable;
+
+//Web3.utils.fromWei(row.value, 'ether')

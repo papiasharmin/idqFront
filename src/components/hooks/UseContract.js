@@ -7,13 +7,13 @@ import MultiSigWallet from './../../contracts/MultiSigWallet.json';
 import MyToken from './../../contracts/MyToken.json';
 import WalletFactory from './../../contracts/WalletFactoryV4.json';
 import { CHAIN_ID, CONTRACT_ADDRESS, MYTOKEN_ADDRESS, RPC_URL } from "./../common/Constant";
-
+import { ethers } from 'ethers';
 /**
  * getProvider メソッド
  */
 export const getProvider = () => {
       // get provider
-      const provider = new Web3(RPC_URL);
+      const provider = new Web3(`https://polygon-mumbai.g.alchemy.com/v2/EgiLkcIuRCG4PwoZiyRTVkYMcZrT8ynP`);
       return provider;
 };
 
@@ -24,10 +24,15 @@ export const getProvider = () => {
  */
 const createContractObject = ( contractAbi, contractAddress) => {
       // get provider
-      const provider = getProvider();
+      //const provider = getProvider();
+      let provider = new ethers.AlchemyProvider("maticmum","EgiLkcIuRCG4PwoZiyRTVkYMcZrT8ynP");
+      let contract = new ethers.Contract(contractAddress, contractAbi, provider)
+      //console.log('dids',contract.getFunction("dids"))
       // create Contract Object
-      const ContractObject = new provider.eth.Contract(contractAbi, contractAddress);
-      return ContractObject;
+      //const ContractObject = new provider.eth.Contract(contractAbi, contractAddress);
+      //return ContractObject;
+      
+      return contract
 };
 
 /**
@@ -60,9 +65,9 @@ export const connectWallet = async() => {
 export const getDid = async(signer) => {
       // call createContractObject メソッド
       const FactoryContract = createContractObject(WalletFactory.abi, CONTRACT_ADDRESS);
-
-      const result =  await FactoryContract.methods.dids(signer).call();
-
+   
+       const result = await FactoryContract.dids(signer) //await FactoryContract.methods.dids(signer).call();
+       console.log('FACTORIDD', result)
       return result;
 };
 
@@ -74,7 +79,7 @@ export const getTokenBalanceOf = async(signer) => {
       // call createContractObject メソッド
       const MyTokenContract  = createContractObject(MyToken.abi, MYTOKEN_ADDRESS);
       // get token balance
-      const num = await MyTokenContract.methods.balanceOf(signer).call();
+      const num = await MyTokenContract.balanceOf(signer)//await MyTokenContract.methods.balanceOf(signer).call();
       return num;
 };
 
@@ -86,7 +91,7 @@ export const getRegisterStatus = async(signer) => {
       // call createContractObject メソッド
       const FactoryContract = createContractObject(WalletFactory.abi, CONTRACT_ADDRESS);
       // get status info
-      var status = await FactoryContract.methods.isRegistered(signer).call()
+      var status = await FactoryContract.isRegistered(signer)
       return status;
 };
 
@@ -98,7 +103,7 @@ export const getVcs = async(did) => {
       // call createContractObject メソッド
       const FactoryContract = createContractObject(WalletFactory.abi, CONTRACT_ADDRESS);
       // get Verifiable Credentials info
-      var vcs = await FactoryContract.methods.getVcs(did).call();
+      var vcs = await FactoryContract.getVcs(did);
       console.log('VCS', vcs)
       return vcs;
 };
@@ -110,7 +115,7 @@ export const walletsCount = async() => {
       // call createContractObject メソッド
       const FactoryContract = createContractObject(WalletFactory.abi, CONTRACT_ADDRESS);
       // get wallet addresses
-      const count = await FactoryContract.methods.walletsCount().call();
+      const count = await FactoryContract.walletsCount();
       
       return count;
 };
@@ -125,7 +130,7 @@ export const getWallets = async(count, start) => {
       // call createContractObject メソッド
       const FactoryContract = createContractObject(WalletFactory.abi, CONTRACT_ADDRESS);
       // get Verifiable Credentials info
-      const multiSigWallets = await FactoryContract.methods.getWallets(count, start).call();
+      const multiSigWallets = await FactoryContract.getWallets(count, start);
      
       return multiSigWallets;
 };
@@ -141,9 +146,9 @@ export const getWalletInfo = async(addr) => {
       const WalletContract = createContractObject(MultiSigWallet.abi, addr);
       console.log('',WalletContract.methods)
       // get Verifiable Credentials info
-       const wName = await WalletContract.methods.getName().call();
-       const required = await WalletContract.methods.getRequired().call();
-       const counts = await WalletContract.methods.getOwnersCount().call();
+       const wName = await WalletContract.getName();
+       const required = await WalletContract.getRequired();
+       const counts = await WalletContract.getOwnersCount();
       
       return {
             wName,
@@ -161,7 +166,7 @@ export const getApprovalCount = async(addr, index) => {
       // call createContractObject メソッド
       const WalletContract = createContractObject(MultiSigWallet.abi, addr);
       // 承認済みの数を求める
-      const approvement = await WalletContract.methods._getApprovalCount(index).call();
+      const approvement = await WalletContract._getApprovalCount(index);
 
       return approvement;
 }; 
@@ -174,7 +179,7 @@ export const getRequired = async(addr) => {
       // call createContractObject メソッド
       const WalletContract = createContractObject(MultiSigWallet.abi, addr);
       // 閾値を取得する。
-      const req = await WalletContract.methods.getRequired().call();
+      const req = await WalletContract.getRequired();
 
       return req;
 }; 
@@ -187,7 +192,7 @@ export const getTxs = async(addr) => {
       // call createContractObject メソッド
       const WalletContract = createContractObject(MultiSigWallet.abi, addr);
       // トランザクションの情報を取得する。
-      const transactions = await WalletContract.methods.getTxs().call();
+      const transactions = await WalletContract.getTxs();
 
       return transactions;
 };
