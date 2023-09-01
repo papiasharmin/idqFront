@@ -29,9 +29,9 @@ const WalletTable = (props) => {
     // ウォレットのアドレスを格納するステート変数
     const [addr, setAddr] = useState(null);
     // ownerの数を格納するステート変数
-    const [ownerCounts, setOwnerCounts] = useState(0);
+    const [ownerCounts, setOwnerCounts] = useState(null);
     // 閾値を格納するステート変数
-    const [req, setReq] = useState(0);
+    const [req, setReq] = useState(null);
 
     // トランザクション一覧画面に渡す要素
     const toTx = {
@@ -50,6 +50,7 @@ const WalletTable = (props) => {
         } = await getWalletInfo(_wallet);
         
         // ステート変数に格納する。
+        console.log('walletinfoprob',required,counts)
         setName(wName);
         setAddr(_wallet);
         setOwnerCounts(counts);
@@ -92,6 +93,7 @@ const WalletTable = (props) => {
                     )
                 } 
                 if(column.label === "Owners") {
+                    console.log('ownerCounts',ownerCounts)
                     return (
                         <TableCell key={column.id} align={column.align}>
                             {ownerCounts}

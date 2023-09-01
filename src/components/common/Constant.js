@@ -14,7 +14,7 @@ export const CHAIN_ID = '80001';
 // rpc URL 
 export const RPC_URL = `https://polygon-mumbai.g.alchemy.com/v2/EgiLkcIuRCG4PwoZiyRTVkYMcZrT8ynP`;//`https://eth-goerli.g.alchemy.com/v2/${PROJECT_ID}`;
 // API Base URL
-export const baseURL = `http://localhost:3001`;//'https://idq-751oto5rq-papiasharmin.vercel.app';//`http://localhost:3001`;//
+export const baseURL = `https://idq-64i8alz5r-papiasharmin.vercel.app`;//'https://idq-751oto5rq-papiasharmin.vercel.app';//`http://localhost:3001`;//
 // PINTA API Base URL
 export const PINTABaseURL = 'https://api.pinata.cloud';
 // PINTA Gateway API Base URL
