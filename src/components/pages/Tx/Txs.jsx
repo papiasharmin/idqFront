@@ -100,8 +100,9 @@ const Txs = (props) => {
         console.log('ADDR',addr)
         try { 
             // トランザクションの情報を取得する。
-            const transactions = await getTxs("0x202E34b639EEE7377aB5d80606f933b8c9c7Bae6");
+            const transactions = await getTxs(addr);
             // コントラクトとアカウントの情報をステート変数に格納する。
+            
             setContract("");
             setAccount(currentAccount);
             setWallet(addr);

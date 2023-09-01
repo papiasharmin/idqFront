@@ -144,12 +144,12 @@ export const getWallets = async(count, start) => {
 export const getWalletInfo = async(addr) => {
       // call createContractObject メソッド
       const WalletContract = createContractObject(MultiSigWallet.abi, addr);
-      console.log('',WalletContract.methods)
+      //console.log('',WalletContract.methods)
       // get Verifiable Credentials info
        const wName = await WalletContract.getName();
        const required = await WalletContract.getRequired();
        const counts = await WalletContract.getOwnersCount();
-      
+      console.log('walletinfo',required, counts)
       return {
             wName,
              required,
@@ -193,6 +193,6 @@ export const getTxs = async(addr) => {
       const WalletContract = createContractObject(MultiSigWallet.abi, addr);
       // トランザクションの情報を取得する。
       const transactions = await WalletContract.getTxs();
-
+      console.log('transactions',transactions)
       return transactions;
 };
