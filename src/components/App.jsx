@@ -5,7 +5,8 @@ import GlobalStyles from '@mui/material/GlobalStyles';
 import IconButton from '@mui/material/IconButton';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import React from "react";
+import React, { useEffect } from "react";
+import { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import './../assets/css/App.css';
 import { useMyContext } from './../Contexts';
@@ -24,6 +25,7 @@ import Upload from './pages/Upload';
 import MyVC from './pages/Vc/MyVc';
 import Verify from './pages/Verify';
 import Wallets from './pages/Wallet/Wallets';
+import { ethers } from 'ethers';
 
 /**
  * Appコンポーネント
@@ -35,20 +37,73 @@ function App() {
     setCurrentAccount
   } = useMyContext();
 
+  const [data, setdata] = useState({
+    address: "",
+    Balance: null,
+  });
+
   /**
    * ウォレット接続ボタンを押した時の処理
    */
   const connectWalletAction = async () => {
-    try {
-      // call createContractObject function
-      const signer  = "0x202E34b639EEE7377aB5d80606f933b8c9c7Bae6";//await connectWallet(); //INSTEAD OF USING BLOCKTO CREAT AN ACOUNT IN  METAMAK AND USE IT 
-      
-      setCurrentAccount(signer);
-    } catch (error) {
-      console.log(error);
+
+      // Asking if metamask is already present or not
+      if (window.ethereum) {
+    
+        // res[0] for fetching a first wallet
+        window.ethereum
+          .request({ method: "eth_requestAccounts" })
+          .then((res) => accountChangeHandler(res[0]));
+      } else {
+        alert("install metamask extension!!");
+        return;
+      }
+    
+    
+    // getbalance function for getting a balance in
+    // a right format with help of ethers
+    const getbalance = (address) => {
+    
+      // Requesting balance method
+      window.ethereum
+        .request({ 
+          method: "eth_getBalance", 
+          params: [address, "latest"] 
+        })
+        .then((balance) => {
+          // Setting balance
+          console.log('balance', balance)
+          //console.log('convertedbal',new ethers.parseEther)
+          // setdata({
+          //   Balance: new ethers.utils.formatEther(balance),
+          // });
+        });
+    };
+    
+    // Function for getting handling all events
+    const accountChangeHandler = (account) => {
+      // Setting an address data
+      setdata({
+        address: account,
+      });
+      setCurrentAccount(account)
+      // Setting a balance
+      getbalance(account);
     }
+   
+    // try {
+    //   // call createContractObject function
+    //   //const signer  = "0x202E34b639EEE7377aB5d80606f933b8c9c7Bae6";//await connectWallet(); //INSTEAD OF USING BLOCKTO CREAT AN ACOUNT IN  METAMAK AND USE IT 
+    //   //await connectWallet()
+    //   setCurrentAccount(signer);
+    // } catch (error) {
+    //   console.log(error);
+    // }
   };
 
+
+
+  console.log('metadata',data)
   return (
     <>
       <GlobalStyles styles={{ body: { margin: 0, padding: 0 } }} />

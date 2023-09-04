@@ -26,12 +26,17 @@ const createContractObject = ( contractAbi, contractAddress) => {
       // get provider
       //const provider = getProvider();
       let provider = new ethers.AlchemyProvider("maticmum","EgiLkcIuRCG4PwoZiyRTVkYMcZrT8ynP");
-      let contract = new ethers.Contract(contractAddress, contractAbi, provider)
+      let contract = new ethers.Contract(contractAddress, contractAbi,provider)
+
+      let newobj = new ethers.JsonRpcProvider('https://rpc-evm-sidechain.xrpl.org');
+      let conxrp = new ethers.Contract(contractAddress, contractAbi, newobj)
+      
       //console.log('dids',contract.getFunction("dids"))
       // create Contract Object
       //const ContractObject = new provider.eth.Contract(contractAbi, contractAddress);
       //return ContractObject;
       
+      console.log('XRP', contract, conxrp)
       return contract
 };
 
@@ -42,8 +47,8 @@ export const connectWallet = async() => {
       // create bloctoSDK object
       const bloctoSDK = new BloctoSDK({
             ethereum: {
-                chainId: CHAIN_ID, 
-                rpc: RPC_URL,
+                chainId: 80001, 
+                rpc: `https://polygon-mumbai.g.alchemy.com/v2/EgiLkcIuRCG4PwoZiyRTVkYMcZrT8ynP`,
             }
       });
       // request
@@ -51,7 +56,7 @@ export const connectWallet = async() => {
       
       const signer = signers[0]
       
-      console.log('BLOCKTO',bloctoSDK.ethereum, signer)
+      console.log('BLOCKTO',bloctoSDK.ethereum, signers)
       return {
             bloctoSDK,
             signer
@@ -65,7 +70,7 @@ export const connectWallet = async() => {
 export const getDid = async(signer) => {
       // call createContractObject メソッド
       const FactoryContract = createContractObject(WalletFactory.abi, CONTRACT_ADDRESS);
-   
+       //console.log('DIDFACTORY',await FactoryContract.getAddress())
        const result = await FactoryContract.dids(signer) //await FactoryContract.methods.dids(signer).call();
        console.log('FACTORIDD', result)
       return result;
@@ -147,8 +152,10 @@ export const getWalletInfo = async(addr) => {
       //console.log('',WalletContract.methods)
       // get Verifiable Credentials info
        const wName = await WalletContract.getName();
-       const required = await WalletContract.getRequired();
-       const counts = await WalletContract.getOwnersCount();
+       let required = await WalletContract.getRequired();
+       let counts = await WalletContract.getOwnersCount();
+       required = Number(required);
+       counts = Number(counts)
       console.log('walletinfo',required, counts)
       return {
             wName,

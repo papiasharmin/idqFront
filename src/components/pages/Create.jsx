@@ -73,9 +73,9 @@ const Create = (props) => {
     const createAction = async() => {
         console.log("owners:", owners);
  
-        try {
+         try {
             setIsLoading(true);
-            // createWalletを使うためのAPIを呼び出す。(引数に課題あり)
+            //createWalletを使うためのAPIを呼び出す。(引数に課題あり)
             superAgent
                 .post(baseURL + '/api/factory/create')
                 .query({
@@ -95,7 +95,7 @@ const Create = (props) => {
                         return err;
                     };
                     console.log(res);
-                    // フラグ OFF
+                    //フラグ OFF
                     setIsLoading(false);
                     // ownersの配列を空にする。
                     setOwners([]);
