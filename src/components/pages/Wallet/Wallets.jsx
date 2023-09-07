@@ -113,7 +113,7 @@ const Wallets = (props) => {
      * 入金用のメソッド
      * @param wallet ウォレットアドレス
      */
-    const depositAction = async (wallet) => {
+    const depositAction = async () => {
 
         try {
             setOpen(false);

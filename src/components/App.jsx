@@ -26,6 +26,7 @@ import MyVC from './pages/Vc/MyVc';
 import Verify from './pages/Verify';
 import Wallets from './pages/Wallet/Wallets';
 import { ethers } from 'ethers';
+import MetaMaskSDK from "@metamask/sdk";
 
 /**
  * Appコンポーネント
@@ -47,6 +48,17 @@ function App() {
    */
   const connectWalletAction = async () => {
 
+  try{
+    const MMSDK = new MetaMaskSDK({
+      useDeeplink: false,
+      communicationLayerPreference: "socket",
+   });
+   const ethereum = MMSDK.getProvider();
+    
+    console.log('MMSDK',MMSDK, ethereum)
+  } catch (err) {
+    console.log(err)
+  }
       // Asking if metamask is already present or not
       if (window.ethereum) {
     
@@ -55,6 +67,8 @@ function App() {
           .request({ method: "eth_requestAccounts" })
           .then((res) => accountChangeHandler(res[0]));
       } else {
+        //let acc = await ethereum.request({ method: 'wallet_scanQRCode', params: [] });
+        //accountChangeHandler(acc)
         alert("install metamask extension!!");
         return;
       }
@@ -72,10 +86,9 @@ function App() {
         })
         .then((balance) => {
           // Setting balance
-          console.log('balance', balance)
-          //console.log('convertedbal',new ethers.parseEther)
+          console.log('balance', new ethers.formatEther(balance))
           // setdata({
-          //   Balance: new ethers.utils.formatEther(balance),
+          //   Balance: new ethers.formatEther(balance),
           // });
         });
     };
@@ -86,7 +99,7 @@ function App() {
       setdata({
         address: account,
       });
-      setCurrentAccount(account)
+      setCurrentAccount("0xb8fAb188F71e3cF627161502112070CbAb595fd2");//account
       // Setting a balance
       getbalance(account);
     }
@@ -101,7 +114,7 @@ function App() {
     // }
   };
 
-
+  setCurrentAccount("0xb8fAb188F71e3cF627161502112070CbAb595fd2")
 
   console.log('metadata',data)
   return (
@@ -136,7 +149,7 @@ function App() {
           { currentAccount === null ? (
             <header className="App-header">
               <p>Welcome to IDQ | Soul Wallet!!</p>
-              <ActionButton2 buttonName="Enter App" color="primary" clickAction={connectWalletAction} />
+              <ActionButton2 buttonName="Enter App" color="primary" clickAction={()=>{}} />
             </header>
           ) : (
             <Routes>

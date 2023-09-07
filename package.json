@@ -33,15 +33,18 @@
     "@blockcerts/blockcerts-verifier": "^1.56.0",
     "@blockcerts/cert-verifier-js": "^6.7.3",
     "@blocto/sdk": "^0.6.0",
+
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
     "@metamask/detect-provider": "^2.0.0",
+    "@metamask/sdk": "^0.6.1",
     "@mui/icons-material": "^5.14.7",
     "@mui/material": "^5.14.7",
     "@stripe/react-stripe-js": "^2.1.2",
     "@stripe/stripe-js": "^2.1.0",
     "@testing-library/react": "^14.0.0",
     "@testing-library/user-event": "^14.4.3",
+    
     "assert": "^2.0.0",
     "axios": "^1.5.0",
     "crypto-browserify": "^3.12.0",
@@ -64,7 +67,6 @@
     "superagent": "^8.1.2",
     "url": "^0.11.1",
     "web-vitals": "^3.4.0",
-    
     "webpack": "^5.88.2"
   }
 }

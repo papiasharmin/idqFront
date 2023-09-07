@@ -26,6 +26,8 @@ const TxTable = (props) => {
         signer
     } = props;
 
+   
+
     // トランザクションのステータス
     const [isExecuted, setIsExecuted] = useState(false);
     // アカウント用のステート変数
@@ -39,7 +41,7 @@ const TxTable = (props) => {
      * 初期化メソッド
      */
     const init = async(_wallet) => {
-        console.log("row:", row)
+        console.log('detail', _columns, row, _wallet)
         // トランザクションデータの情報を取得する。
         const executed = row.executed;
         // 承認済みの数を求める
@@ -61,9 +63,9 @@ const TxTable = (props) => {
 
 
     // 副作用フック
-    useEffect(() => {
-        init(_wallet);
-    }, []);
+    // useEffect(() => {
+    //     init(_wallet);
+    // }, []);
 
     return (
         <>
@@ -87,8 +89,7 @@ const TxTable = (props) => {
                     if(column.label === "Value") {
                         return (
                             <TableCell key={column.id} align={column.align}>
-                                {/* ETHに変換して出力する。 */}
-                                {0}
+                                {Number(row.value)}
                             </TableCell>
                         )
                     } 

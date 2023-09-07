@@ -26,7 +26,7 @@ import {
     getTxs
 } from './../../hooks/UseContract';
 import TxTable from './TxTable';
-
+import MultiSigWallet from './../../../contracts/MultiSigWallet.json';
 /**
  * 表の最上位ヘッダー部の配列
  */
@@ -69,7 +69,7 @@ const Txs = (props) => {
     // 送金先アドレスを格納するためのステート変数
     const [to, setTo] = useState(null);
     // 送金額を格納するためのステート変数
-    const [value, setValue] = useState(0);
+    const [value, setValue] = useState(null);
     // インプットデータ用のステート変数 (今後0x以外を入力できるようにする予定)
     const [inputData, setInputData] = useState('0x');
     // トランザクションが正常に処理された場合のフラグ
@@ -101,8 +101,9 @@ const Txs = (props) => {
         try { 
             // トランザクションの情報を取得する。
             const transactions = await getTxs(addr);
+            //const nputData = await getABIEncodeedData()
             // コントラクトとアカウントの情報をステート変数に格納する。
-            
+            console.log('trans',transactions)
             setContract("");
             setAccount(currentAccount);
             setWallet(addr);
@@ -122,7 +123,7 @@ const Txs = (props) => {
 
         try {
             setIsLoading(true);    
-
+            console.log('valuetrans',value)
             // submit用のAPIを呼び出す
             superAgent
                 .post(baseURL + '/api/wallet/submit')

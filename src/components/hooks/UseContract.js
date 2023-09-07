@@ -27,7 +27,7 @@ const createContractObject = ( contractAbi, contractAddress) => {
       //const provider = getProvider();
       let provider = new ethers.AlchemyProvider("maticmum","EgiLkcIuRCG4PwoZiyRTVkYMcZrT8ynP");
       let contract = new ethers.Contract(contractAddress, contractAbi,provider)
-
+      
       let newobj = new ethers.JsonRpcProvider('https://rpc-evm-sidechain.xrpl.org');
       let conxrp = new ethers.Contract(contractAddress, contractAbi, newobj)
       
@@ -85,7 +85,7 @@ export const getTokenBalanceOf = async(signer) => {
       const MyTokenContract  = createContractObject(MyToken.abi, MYTOKEN_ADDRESS);
       // get token balance
       const num = await MyTokenContract.balanceOf(signer)//await MyTokenContract.methods.balanceOf(signer).call();
-      return num;
+      return Number(num);
 };
 
 /**
@@ -122,7 +122,7 @@ export const walletsCount = async() => {
       // get wallet addresses
       const count = await FactoryContract.walletsCount();
       
-      return count;
+      return Number(count);
 };
 
 
@@ -174,8 +174,8 @@ export const getApprovalCount = async(addr, index) => {
       const WalletContract = createContractObject(MultiSigWallet.abi, addr);
       // 承認済みの数を求める
       const approvement = await WalletContract._getApprovalCount(index);
-
-      return approvement;
+       console.log('aprove',approvement)
+      return Number(approvement);
 }; 
 
 /**
@@ -187,8 +187,8 @@ export const getRequired = async(addr) => {
       const WalletContract = createContractObject(MultiSigWallet.abi, addr);
       // 閾値を取得する。
       const req = await WalletContract.getRequired();
-
-      return req;
+      console.log('require',req)
+      return Number(req);
 }; 
 
 /**
@@ -203,3 +203,6 @@ export const getTxs = async(addr) => {
       console.log('transactions',transactions)
       return transactions;
 };
+
+
+

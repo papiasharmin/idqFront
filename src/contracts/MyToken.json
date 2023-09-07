@@ -27647,12 +27647,12 @@
     "80001": {
       "events": {},
       "links": {},
-      "address": "0x8dDbFD6f1832e0B1342E5871c6a8De4D8549Ca27",
-      "transactionHash": "0x0f50db3e2debe5a63bb815d1979350cc8c6e6ba0ba8aa555b82ce92cbcb5304c"
+      "address": "0xA1F724575907980ed77377a8c137a3398a45B24b",
+      "transactionHash": "0x04c96947ee9d159f81a271972c66d0f62c22cb445cc8d00fe2591d5fa7cc3a5d"
     }
   },
   "schemaVersion": "3.4.15",
-  "updatedAt": "2023-08-29T04:03:23.108Z",
+  "updatedAt": "2023-09-07T05:36:57.906Z",
   "networkType": "ethereum",
   "devdoc": {
     "kind": "dev",
