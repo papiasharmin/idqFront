@@ -114,7 +114,7 @@ function App() {
     // }
   };
 
-  setCurrentAccount("0xb8fAb188F71e3cF627161502112070CbAb595fd2")
+  //setCurrentAccount("0xb8fAb188F71e3cF627161502112070CbAb595fd2")
 
   console.log('metadata',data)
   return (
@@ -149,7 +149,7 @@ function App() {
           { currentAccount === null ? (
             <header className="App-header">
               <p>Welcome to IDQ | Soul Wallet!!</p>
-              <ActionButton2 buttonName="Enter App" color="primary" clickAction={()=>{}} />
+              <ActionButton2 buttonName="Enter App" color="primary" clickAction={connectWallet} />
             </header>
           ) : (
             <Routes>
