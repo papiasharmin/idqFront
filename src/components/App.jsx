@@ -149,7 +149,7 @@ function App() {
           { currentAccount === null ? (
             <header className="App-header">
               <p>Welcome to IDQ | Soul Wallet!!</p>
-              <ActionButton2 buttonName="Enter App" color="primary" clickAction={connectWallet} />
+              <ActionButton2 buttonName="Enter App" color="primary" clickAction={connectWalletAction} />
             </header>
           ) : (
             <Routes>
