@@ -114,7 +114,7 @@ const Wallets = (props) => {
      * @param wallet ウォレットアドレス
      */
     const depositAction = async () => {
-
+        console.log('BURNN')
         try {
             setOpen(false);
             setIsLoading(true);

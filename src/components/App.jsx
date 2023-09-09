@@ -116,7 +116,7 @@ function App() {
 
   //setCurrentAccount("0xb8fAb188F71e3cF627161502112070CbAb595fd2")
 
-  console.log('metadata',data)
+  
   return (
     <>
       <GlobalStyles styles={{ body: { margin: 0, padding: 0 } }} />

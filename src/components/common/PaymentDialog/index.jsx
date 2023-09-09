@@ -19,7 +19,7 @@ const PaymentDialog = (props) => {
             handleClose, 
             buyAction
       } = props;
-      console.log('action',buyAction)
+      
       return (
             <>
                   <Dialog 

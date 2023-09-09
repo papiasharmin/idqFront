@@ -14,12 +14,13 @@ const PaymentForm = () => {
                   style={{marginTop: '20px'}}
                   onSubmit={async e => {
                         e.preventDefault()
+                        console.log('PAYMENTSTRIPE');
                         if (!stripe || !elements) return
                         const result = await stripe.confirmPayment({
                               elements,
                               redirect: 'if_required',
                         })
-                        console.log(result)
+                        console.log('PAYMENTRESULTSTRIPE',result)
                   }}
             >
                   <PaymentElement />

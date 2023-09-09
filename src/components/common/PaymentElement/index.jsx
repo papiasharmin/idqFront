@@ -28,8 +28,11 @@ const PaymentElement = () => {
                         console.log("IDQToken発行用API呼び出し中に失敗", err);
                         // popUpメソッドの呼び出し
                         return err;
+                  }else{
+                        console.log('res',res);
+                        setPiClientSecret(res.body.clientSecret)
                   }
-                  console.log('res',res);
+                 
                   
                   
             });
