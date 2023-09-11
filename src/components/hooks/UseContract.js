@@ -81,10 +81,12 @@ export const getDid = async(signer) => {
  * @param signer ログイン中のsignerオブジェクト
  */
 export const getTokenBalanceOf = async(signer) => {
+      
       // call createContractObject メソッド
       const MyTokenContract  = createContractObject(MyToken.abi, MYTOKEN_ADDRESS);
       // get token balance
       const num = await MyTokenContract.balanceOf(signer)//await MyTokenContract.methods.balanceOf(signer).call();
+ 
       return Number(num);
 };
 

@@ -248,6 +248,7 @@ const Home = (props) => {
     };
 
     useEffect(()=> {
+        console.log('currentaccount',currentAccount)
         getBalance();
         checkStatus();
         setWidth(window.innerWidth);
@@ -258,7 +259,7 @@ const Home = (props) => {
         })
       
         return () => window.removeEventListener(`resize`, updateWidth)
-    }, []);
+    }, [currentAccount]);
 
     return (
         <>

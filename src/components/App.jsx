@@ -86,7 +86,7 @@ function App() {
         })
         .then((balance) => {
           // Setting balance
-          console.log('balance', new ethers.formatEther(balance))
+          //console.log('balance', new ethers.formatEther(balance))
           // setdata({
           //   Balance: new ethers.formatEther(balance),
           // });
@@ -99,7 +99,7 @@ function App() {
       setdata({
         address: account,
       });
-      setCurrentAccount("0xb8fAb188F71e3cF627161502112070CbAb595fd2");//account
+      setCurrentAccount(account);//account
       // Setting a balance
       getbalance(account);
     }
