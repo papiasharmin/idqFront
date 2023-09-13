@@ -16,10 +16,10 @@ export const CHAIN_ID = '80001';//'1440002';//
 // rpc URL 
 export const RPC_URL = `https://polygon-mumbai.g.alchemy.com/v2/EgiLkcIuRCG4PwoZiyRTVkYMcZrT8ynP`;//`https://rpc-evm-sidechain.xrpl.org`;//`https://polygon-mumbai.g.alchemy.com/v2/EgiLkcIuRCG4PwoZiyRTVkYMcZrT8ynP`;//`https://eth-goerli.g.alchemy.com/v2/${PROJECT_ID}`;
 // API Base URL
-export const baseURL = `http://localhost:3001`//`https://idq-api.vercel.app`;//;
+export const baseURL =`https://idq-api.vercel.app`;//; `http://localhost:3001`//
 // PINTA API Base URL
 export const PINTABaseURL = 'https://api.pinata.cloud';
 // PINTA Gateway API Base URL
 export const PINTAGatewayURL = 'https://gateway.pinata.cloud/ipfs';
-// width threshold
+
 export const WIDTH_THRESHOLD = 768;
