@@ -290,7 +290,7 @@ const Home = (props) => {
                     {/* QrCodeDialog */}
                     <QrCodeDialog
                         open={qrOpen}
-                        did={fullDid}
+                        did={currentAccount}
                         handleClose={(e) => {handleQrClose()}} 
                     />
                     <StyledPaper 

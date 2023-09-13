@@ -47,62 +47,64 @@ function App() {
    * ウォレット接続ボタンを押した時の処理
    */
   const connectWalletAction = async () => {
-
-  try{
-    const MMSDK = new MetaMaskSDK({
-      useDeeplink: false,
-      communicationLayerPreference: "socket",
-   });
-   const ethereum = MMSDK.getProvider();
+  let signer = await connectWallet();
+  console.log('signer',signer)
+  setCurrentAccount(signer)
+  // try{
+  //   const MMSDK = new MetaMaskSDK({
+  //     useDeeplink: false,
+  //     communicationLayerPreference: "socket",
+  //  });
+  //  const ethereum = MMSDK.getProvider();
     
-    console.log('MMSDK',MMSDK, ethereum)
-  } catch (err) {
-    console.log(err)
-  }
-      // Asking if metamask is already present or not
-      if (window.ethereum) {
+  //   console.log('MMSDK',MMSDK, ethereum)
+  // } catch (err) {
+  //   console.log(err)
+  // }
+  //     // Asking if metamask is already present or not
+  //     if (window.ethereum) {
     
-        // res[0] for fetching a first wallet
-        window.ethereum
-          .request({ method: "eth_requestAccounts" })
-          .then((res) => accountChangeHandler(res[0]));
-      } else {
-        //let acc = await ethereum.request({ method: 'wallet_scanQRCode', params: [] });
-        //accountChangeHandler(acc)
-        alert("install metamask extension!!");
-        return;
-      }
+  //       // res[0] for fetching a first wallet
+  //       window.ethereum
+  //         .request({ method: "eth_requestAccounts" })
+  //         .then((res) => accountChangeHandler(res[0]));
+  //     } else {
+  //       //let acc = await ethereum.request({ method: 'wallet_scanQRCode', params: [] });
+  //       //accountChangeHandler(acc)
+  //       alert("install metamask extension!!");
+  //       return;
+  //     }
     
     
-    // getbalance function for getting a balance in
-    // a right format with help of ethers
-    const getbalance = (address) => {
+  //   // getbalance function for getting a balance in
+  //   // a right format with help of ethers
+  //   const getbalance = (address) => {
     
-      // Requesting balance method
-      window.ethereum
-        .request({ 
-          method: "eth_getBalance", 
-          params: [address, "latest"] 
-        })
-        .then((balance) => {
-          // Setting balance
-          //console.log('balance', new ethers.formatEther(balance))
-          // setdata({
-          //   Balance: new ethers.formatEther(balance),
-          // });
-        });
-    };
+  //     // Requesting balance method
+  //     window.ethereum
+  //       .request({ 
+  //         method: "eth_getBalance", 
+  //         params: [address, "latest"] 
+  //       })
+  //       .then((balance) => {
+  //         // Setting balance
+  //         //console.log('balance', new ethers.formatEther(balance))
+  //         // setdata({
+  //         //   Balance: new ethers.formatEther(balance),
+  //         // });
+  //       });
+  //   };
     
-    // Function for getting handling all events
-    const accountChangeHandler = (account) => {
-      // Setting an address data
-      setdata({
-        address: account,
-      });
-      setCurrentAccount(account);//account
-      // Setting a balance
-      getbalance(account);
-    }
+  //   // Function for getting handling all events
+  //   const accountChangeHandler = (account) => {
+  //     // Setting an address data
+  //     setdata({
+  //       address: account,
+  //     });
+  //     //setCurrentAccount(account);//account
+  //     // Setting a balance
+  //     getbalance(account);
+  //   }
    
     // try {
     //   // call createContractObject function

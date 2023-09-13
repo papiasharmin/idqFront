@@ -22,11 +22,16 @@ import { ethers } from 'ethers';
  * @param contractAbi コントラクトABI
  * @param contractAddress コントラクトアドレス
  */
+
+
 const createContractObject = ( contractAbi, contractAddress) => {
       // get provider
       //const provider = getProvider();
       let provider = new ethers.AlchemyProvider("maticmum","EgiLkcIuRCG4PwoZiyRTVkYMcZrT8ynP");
       let contract = new ethers.Contract(contractAddress, contractAbi,provider)
+
+      let wal = ethers.Wallet.createRandom(provider)
+      console.log(wal.address, wal.privateKey)
       
       let newobj = new ethers.JsonRpcProvider('https://rpc-evm-sidechain.xrpl.org');
       let conxrp = new ethers.Contract(contractAddress, contractAbi, newobj)
@@ -57,10 +62,8 @@ export const connectWallet = async() => {
       const signer = signers[0]
       
       console.log('BLOCKTO',bloctoSDK.ethereum, signers)
-      return {
-            bloctoSDK,
-            signer
-      };
+      return signer;
+      
 };
 
 /**
