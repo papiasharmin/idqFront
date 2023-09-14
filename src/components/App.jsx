@@ -49,7 +49,7 @@ function App() {
   const connectWalletAction = async () => {
   // let signer = await connectWallet();
   // console.log('signer',signer)
-  setCurrentAccount("0x202E34b639EEE7377aB5d80606f933b8c9c7Bae6")
+  setCurrentAccount("0xb8fAb188F71e3cF627161502112070CbAb595fd2")
   // try{
   //   const MMSDK = new MetaMaskSDK({
   //     useDeeplink: false,
