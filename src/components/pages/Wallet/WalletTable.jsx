@@ -32,6 +32,7 @@ const WalletTable = (props) => {
     const [ownerCounts, setOwnerCounts] = useState(null);
     // 閾値を格納するステート変数
     const [req, setReq] = useState(null);
+    const [asset, setAsset] = useState(null);
 
     // トランザクション一覧画面に渡す要素
     const toTx = {
@@ -46,7 +47,10 @@ const WalletTable = (props) => {
         const { 
             wName,
             required,
-            counts 
+            counts,
+            ownersaddr,
+             balance
+            
         } = await getWalletInfo(_wallet);
         
         // ステート変数に格納する。
@@ -55,6 +59,7 @@ const WalletTable = (props) => {
         setAddr(_wallet);
         setOwnerCounts(counts);
         setReq(required);
+        setAsset(balance)
     };
 
     // 副作用フック
@@ -84,6 +89,13 @@ const WalletTable = (props) => {
                         </TableCell>
                     );
                 }
+                if(column.label === "Asset") {
+                    return (
+                        <TableCell key={column.id} align={column.align}>
+                            {asset}
+                        </TableCell>
+                    )
+                } 
                 /* NameとStatusについては個別に条件が異なってくるので別関数で条件を整理して描画する。 */
                 if(column.label === "Name") {
                     return (

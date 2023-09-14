@@ -27801,10 +27801,16 @@
       "links": {},
       "address": "0xd13693f8458e9faDDDeB1Aec354A594A98934f65",
       "transactionHash": "0x1867450ac4dd0aa8a305007f0f7bd5a06fd34bb06549db8c80888e383cfb7e67"
+    },
+    "11155111": {
+      "events": {},
+      "links": {},
+      "address": "0xec658386F735c4f02BA0B4CCC21A4a35bc87CD1D",
+      "transactionHash": "0x17f0f8506bb6682eec664d6d937ee3082ee7a38252268a49b5b8e8a1c552df8b"
     }
   },
   "schemaVersion": "3.4.15",
-  "updatedAt": "2023-09-10T14:47:50.644Z",
+  "updatedAt": "2023-09-13T13:43:01.601Z",
   "networkType": "ethereum",
   "devdoc": {
     "kind": "dev",

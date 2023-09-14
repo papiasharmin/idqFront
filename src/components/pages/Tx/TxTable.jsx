@@ -8,7 +8,7 @@ import './../../../assets/css/App.css';
 import {
     getApprovalCount, getRequired
 } from './../../hooks/UseContract';
-
+import { ethers } from 'ethers';
 /**
  * TxTable
  * @param props 引数
@@ -89,7 +89,7 @@ const TxTable = (props) => {
                     if(column.label === "Value") {
                         return (
                             <TableCell key={column.id} align={column.align}>
-                                {Number(row.value)}
+                                {ethers.formatEther( Number(row.value).toString())}
                             </TableCell>
                         )
                     } 

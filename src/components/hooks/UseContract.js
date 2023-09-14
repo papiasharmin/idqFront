@@ -23,25 +23,19 @@ import { ethers } from 'ethers';
  * @param contractAddress コントラクトアドレス
  */
 
-
+console.log('CHAIN',CHAIN_ID,RPC_URL)
 const createContractObject = ( contractAbi, contractAddress) => {
       // get provider
       //const provider = getProvider();
-      let provider = new ethers.AlchemyProvider("maticmum","EgiLkcIuRCG4PwoZiyRTVkYMcZrT8ynP");
+      let provider = new ethers.JsonRpcProvider(RPC_URL);//new ethers.AlchemyProvider("maticmum","EgiLkcIuRCG4PwoZiyRTVkYMcZrT8ynP");
       let contract = new ethers.Contract(contractAddress, contractAbi,provider)
 
       let wal = ethers.Wallet.createRandom(provider)
       console.log(wal.address, wal.privateKey)
       
-      let newobj = new ethers.JsonRpcProvider('https://rpc-evm-sidechain.xrpl.org');
-      let conxrp = new ethers.Contract(contractAddress, contractAbi, newobj)
+      // let newobj = new ethers.JsonRpcProvider('https://rpc-evm-sidechain.xrpl.org');
+      // let conxrp = new ethers.Contract(contractAddress, contractAbi, newobj)
       
-      //console.log('dids',contract.getFunction("dids"))
-      // create Contract Object
-      //const ContractObject = new provider.eth.Contract(contractAbi, contractAddress);
-      //return ContractObject;
-      
-      console.log('XRP', contract, conxrp)
       return contract
 };
 
@@ -52,8 +46,8 @@ export const connectWallet = async() => {
       // create bloctoSDK object
       const bloctoSDK = new BloctoSDK({
             ethereum: {
-                chainId: 80001, 
-                rpc: `https://polygon-mumbai.g.alchemy.com/v2/EgiLkcIuRCG4PwoZiyRTVkYMcZrT8ynP`,
+                chainId: CHAIN_ID, 
+                rpc: RPC_URL,
             }
       });
       // request
@@ -159,13 +153,18 @@ export const getWalletInfo = async(addr) => {
        const wName = await WalletContract.getName();
        let required = await WalletContract.getRequired();
        let counts = await WalletContract.getOwnersCount();
+       let balance = await WalletContract.getAsset();
+       let ownersaddr = await WalletContract.getOwners();
        required = Number(required);
        counts = Number(counts)
-      console.log('walletinfo',required, counts)
+       balance = ethers.formatEther( Number(balance).toString())
+      console.log('walletinfo',required, counts, balance, ownersaddr)
       return {
             wName,
              required,
-             counts
+             counts,
+             ownersaddr,
+             balance
       };
 };
 

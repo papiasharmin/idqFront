@@ -32,9 +32,10 @@ import WalletTable from './WalletTable';
 const columns = [
     { id: 'no', label: 'No.', minWidth: 20, align: 'center' },
     { id: 'address', label: 'Address', minWidth: 200, align: 'center' },
-    { id: 'name', label: 'Name', minWidth: 150, align: 'center'},
-    { id: 'owners', label: 'Owners', minWidth: 150, align: 'center'},
-    { id: 'required', label: 'Required', minWidth: 150, align: 'center'},
+    { id: 'asset', label: 'Asset', minWidth: 100, align: 'center' },
+    { id: 'name', label: 'Name', minWidth: 100, align: 'center'},
+    { id: 'owners', label: 'Owners', minWidth: 100, align: 'center'},
+    { id: 'required', label: 'Required', minWidth: 100, align: 'center'},
     { id: 'deposit', label: 'Deposit', minWidth: 150, align: 'center'},
 ];
 
