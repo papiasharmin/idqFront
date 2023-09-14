@@ -121,7 +121,7 @@ const Home = (props) => {
      */
     const sendAction = async(to, amount) => {
         setIsLoading(true);
-        console.log('AMOUNT',to,amount)
+        console.log('AMOUNT',to,amount, fullDid)
         // 送金用のAPIを呼び出す
         superAgent
             .post(baseURL + '/api/send')
@@ -290,7 +290,7 @@ const Home = (props) => {
                     {/* QrCodeDialog */}
                     <QrCodeDialog
                         open={qrOpen}
-                        did={currentAccount}
+                        did={fullDid}
                         handleClose={(e) => {handleQrClose()}} 
                     />
                     <StyledPaper 
