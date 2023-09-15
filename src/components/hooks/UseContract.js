@@ -26,7 +26,7 @@ import { ethers } from 'ethers';
 console.log('CHAIN',CHAIN_ID,RPC_URL)
 const createContractObject = ( contractAbi, contractAddress) => {
       // get provider
-      //const provider = getProvider();
+
       let provider = new ethers.JsonRpcProvider(RPC_URL);//new ethers.AlchemyProvider("maticmum","EgiLkcIuRCG4PwoZiyRTVkYMcZrT8ynP");
       let contract = new ethers.Contract(contractAddress, contractAbi,provider)
 

@@ -47,9 +47,9 @@ function App() {
    * ウォレット接続ボタンを押した時の処理
    */
   const connectWalletAction = async () => {
-  // let signer = await connectWallet();
-  // console.log('signer',signer)
-  setCurrentAccount("0xb8fAb188F71e3cF627161502112070CbAb595fd2")
+  let signer = await connectWallet();
+  console.log('signer',signer)
+  setCurrentAccount(signer); //"0x202E34b639EEE7377aB5d80606f933b8c9c7Bae6"
   // try{
   //   const MMSDK = new MetaMaskSDK({
   //     useDeeplink: false,

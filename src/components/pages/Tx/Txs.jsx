@@ -131,7 +131,8 @@ const Txs = (props) => {
                     to: to,
                     value: value,
                     data: inputData,
-                    address: wallet
+                    address: wallet,
+                    sender:currentAccount
                 })
                 .end(async(err, res) => {
                     if (err) {
@@ -168,7 +169,8 @@ const Txs = (props) => {
                 .post(baseURL + '/api/wallet/approve')
                 .query({
                     txId: txId,
-                    address: wallet
+                    address: wallet,
+                    sender:currentAccount
                 })
                 .end(async(err, res) => {
                     if (err) {
@@ -206,7 +208,8 @@ const Txs = (props) => {
                 .post(baseURL + '/api/wallet/revoke')
                 .query({
                     txId: txId,
-                    address: wallet
+                    address: wallet,
+                    sender:currentAccount
                 })
                 .end(async(err, res) => {
                     if (err) {
