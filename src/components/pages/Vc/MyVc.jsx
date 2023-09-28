@@ -98,7 +98,7 @@ const MyVC = (props) => {
 
     useEffect(() => {
         init();
-    });
+    },[]);
 
     return (
         <MainContainer>

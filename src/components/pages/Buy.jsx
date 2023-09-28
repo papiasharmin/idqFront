@@ -107,6 +107,8 @@ const Buy = (props) => {
             setOpen(false);
       }
 
+   
+
       return (
             <MainContainer>
                   { /* Payment Dialog */ } 

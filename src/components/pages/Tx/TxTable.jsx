@@ -89,7 +89,7 @@ const TxTable = (props) => {
                     if(column.label === "Value") {
                         return (
                             <TableCell key={column.id} align={column.align}>
-                                {ethers.formatEther( Number(row.value).toString())}
+                                {ethers.utils.formatEther( Number(row.value).toString())}
                             </TableCell>
                         )
                     } 

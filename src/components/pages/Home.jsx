@@ -62,6 +62,8 @@ const Home = (props) => {
     const [amount, setAmount] = useState(0);
     const [open, setOpen] = useState(false);
     const [qrOpen, setQrOpen] = useState(false);
+    const [data, setData] = useState({});
+    const [loading, setLoading] = useState(true);
 
     /**
      * Register function 
@@ -111,7 +113,7 @@ const Home = (props) => {
 
                 // popUpメソッドの呼び出し
                 popUp(true, "successfull!!");
-                await checkStatus();
+                checkStatus();
                 setIsLoading(false);   
             });
     }
@@ -252,6 +254,8 @@ const Home = (props) => {
         getBalance();
         checkStatus();
         setWidth(window.innerWidth);
+       
+     
 
         window.addEventListener(`resize`, updateWidth, {
             capture: false,
@@ -259,7 +263,11 @@ const Home = (props) => {
         })
       
         return () => window.removeEventListener(`resize`, updateWidth)
-    }, [currentAccount]);
+    }, [currentAccount,fullDid]);
+
+    // useEffect(()=> {
+    //   console.log('diddd',fullDid)
+    // }, [fullDid]);
 
     return (
         <>

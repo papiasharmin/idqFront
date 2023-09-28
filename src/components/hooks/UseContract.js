@@ -8,6 +8,25 @@ import MyToken from './../../contracts/MyToken.json';
 import WalletFactory from './../../contracts/WalletFactoryV4.json';
 import { CHAIN_ID, CONTRACT_ADDRESS, MYTOKEN_ADDRESS, RPC_URL } from "./../common/Constant";
 import { ethers } from 'ethers';
+// import { Core } from '@walletconnect/core'
+// import { Web3Wallet } from '@walletconnect/web3wallet'
+// import AuthClient from '@walletconnect/auth-client'
+// import { buildApprovedNamespaces } from '@walletconnect/utils'
+// const core = new Core({
+//   projectId:"6df1086ec4c69b1400bf2426405b9a93"
+// })
+
+// const web3wallet = await Web3Wallet.init({
+//   core, // <- pass the shared `core` instance
+//   metadata: {
+//     name: 'IDQ Soul Wallet',
+//     description: 'web3wallet',
+//     url: 'www.walletconnect.com',
+//     icons: []
+//   }
+// })
+
+// console.log('WALLETCONNET',web3wallet.core.crypto.generateKeyPair())
 /**
  * getProvider メソッド
  */
@@ -27,38 +46,109 @@ console.log('CHAIN',CHAIN_ID,RPC_URL)
 const createContractObject = ( contractAbi, contractAddress) => {
       // get provider
 
-      let provider = new ethers.JsonRpcProvider(RPC_URL);//new ethers.AlchemyProvider("maticmum","EgiLkcIuRCG4PwoZiyRTVkYMcZrT8ynP");
-      let contract = new ethers.Contract(contractAddress, contractAbi,provider)
+      let provider = new ethers.providers.JsonRpcProvider(RPC_URL);//new ethers.JsonRpcProvider(RPC_URL);
+      let contract = new ethers.Contract(contractAddress, contractAbi, provider)
 
-      let wal = ethers.Wallet.createRandom(provider)
-      console.log(wal.address, wal.privateKey)
-      
       // let newobj = new ethers.JsonRpcProvider('https://rpc-evm-sidechain.xrpl.org');
       // let conxrp = new ethers.Contract(contractAddress, contractAbi, newobj)
       
       return contract
 };
 
+// import the builder util
+
+
+// web3wallet.on('session_proposal', async sessionProposal => {
+//   const { id, params } = sessionProposal
+
+//   // ------- namespaces builder util ------------ //
+//   const approvedNamespaces = buildApprovedNamespaces({
+//     proposal: params,
+//     supportedNamespaces: {
+//       eip155: {
+//         chains: ['eip155:80001'],
+//         methods: ['eth_sendTransaction', 'personal_sign'],
+//         events: ['accountsChanged', 'chainChanged'],
+//         accounts: [
+//           'eip155:80001:0x202E34b639EEE7377aB5d80606f933b8c9c7Bae6',
+         
+//         ]
+//       }
+//     }
+//   })
+//   // ------- end namespaces builder util ------------ //
+
+//   const session = await web3wallet.approveSession({
+//     id,
+//     namespaces: approvedNamespaces
+//   })
+// })
+
+
+//     const {topic, uri} = await AuthClient.core.pairing.create()
+//     await web3wallet.pair({ uri })
+
 /**
  * connectWallet メソッド
  */
-export const connectWallet = async() => {
+ export const connectWallet = async() => {
       // create bloctoSDK object
-      const bloctoSDK = new BloctoSDK({
-            ethereum: {
-                chainId: CHAIN_ID, 
-                rpc: RPC_URL,
-            }
-      });
-      // request
-      const signers = await bloctoSDK.ethereum.request({ method: 'eth_requestAccounts' });
+      // const bloctoSDK = new BloctoSDK({
+      //       ethereum: {
+      //           chainId: CHAIN_ID, 
+      //           rpc: RPC_URL,
+      //       }
+      // });
+      // // request
+      // const signers = await bloctoSDK.ethereum.request({ method: 'eth_requestAccounts' });
       
-      const signer = signers[0]
+      // const signer = signers[0]
       
-      console.log('BLOCKTO',bloctoSDK.ethereum, signers)
-      return signer;
+      // console.log('BLOCKTO',bloctoSDK.ethereum, signers)
       
-};
+// console.log("process.env.CONNECT_KEY", process.env.CONNECT_KEY)
+// const authClient = await AuthClient.init({
+//   projectId: "6df1086ec4c69b1400bf2426405b9a93",
+//   metadata: {
+//     name: 'idq-soul-wallet',
+//     description: 'A wallet using WalletConnect AuthClient',
+//     url: 'https://idq-front.vercel.app',
+//     icons: ['']
+//   }
+// })
+//       //console.log(authClient.emit("auth_request"))
+//       authClient.emit("auth_request")
+//       authClient.on('auth_request', async ({ id, params }) => {
+//             // the user’s address
+//             let wallet = ethers.Wallet.createRandom()
+//             const iss = `did:pkh:eip155:80001:${wallet.address}`
+          
+//             // format the cacao payload with the user’s address
+//             const message = authClient.formatMessage(params.cacaoPayload, iss)
+          
+//             // This is a good point to trigger a UI event to provide the user
+//             // with a button to accept or reject the authentication request,
+//             // instead of automatically responding.
+//             const signature = await wallet.signMessage(message)
+          
+//             await authClient.respond(
+//               {
+//                 id: id,
+//                 signature: {
+//                   s: signature,
+//                   t: 'eip191'
+//                 }
+//               },
+//               iss
+//             )
+          
+//           })
+//           const {topic, uri} = await authClient.core.pairing.create()
+//           await authClient.core.pairing.pair({ uri })
+
+          
+      
+ };
 
 /**
  * getDidメソッド
@@ -98,6 +188,15 @@ export const getRegisterStatus = async(signer) => {
       var status = await FactoryContract.isRegistered(signer)
       return status;
 };
+
+export const userexist = async(email) => {
+      // call createContractObject メソッド
+      const FactoryContract = createContractObject(WalletFactory.abi, CONTRACT_ADDRESS);
+      // get status info
+      var status = await FactoryContract.pass(email)
+      return status;
+};
+
 
 /**
  * getVcsメソッド
@@ -157,7 +256,7 @@ export const getWalletInfo = async(addr) => {
        let ownersaddr = await WalletContract.getOwners();
        required = Number(required);
        counts = Number(counts)
-       balance = ethers.formatEther( Number(balance).toString())
+       balance = ethers.utils.formatEther( Number(balance).toString())
       console.log('walletinfo',required, counts, balance, ownersaddr)
       return {
             wName,
