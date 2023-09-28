@@ -15,7 +15,7 @@ export const CONTRACT_ADDRESS = "0x3Bdf037317Af5be7f623cEb0b94FB9a5dD5480db";//"
 export const CHAIN_ID = '1440002';//'80001';//'11155111'
 // rpc URL 
 export const RPC_URL = `https://rpc-evm-sidechain.xrpl.org`;//`https://polygon-mumbai.g.alchemy.com/v2/EgiLkcIuRCG4PwoZiyRTVkYMcZrT8ynP`;//`https://eth-sepolia.g.alchemy.com/v2/3fMr3CwsUtbgtcenWRgX9A0Cx9tkOfVr`;//
-export const baseURL =`http://localhost:3001`;//`https://idq-api.vercel.app`;//pm
+export const baseURL =`https://idq-api.vercel.app`;//`http://localhost:3001`;
 // PINTA API Base URL
 export const PINTABaseURL = 'https://api.pinata.cloud';
 // PINTA Gateway API Base URL
