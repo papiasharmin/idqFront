@@ -123,7 +123,8 @@ const Buy = (props) => {
                               mx: "auto", 
                               p: 0, 
                               borderRadius: 4, 
-                              marginTop: 4
+                              marginTop: 4,
+                              backgroundColor:'whitesmoke'
                         }}
                   >
                         {isLoading ? (
@@ -142,7 +143,7 @@ const Buy = (props) => {
                                     >
                                           <div className="App-content">
                                                 <p><strong>You can buy IDQ Token</strong></p>
-                                                <p></p>
+                                                
                                                 <TextField 
                                                       id="amount" 
                                                       placeholder="enter amount" 

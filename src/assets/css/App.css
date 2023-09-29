@@ -21,6 +21,8 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: rgb(19, 18, 18);
+  background-color: whitesmoke;
+  box-shadow: 5px 5px 15px gray;
 }
 
 .App-content {
@@ -30,6 +32,8 @@
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
+  
+ 
 }
 
 .loading {

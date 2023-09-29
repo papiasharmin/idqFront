@@ -163,7 +163,7 @@ const Create = (props) => {
 
     return(
         <MainContainer>
-            <StyledPaper sx={{my: 1, mx: "auto", p: 0, borderRadius: 4, marginTop: 4}}>
+            <StyledPaper justifyContent="center" sx={{my: 1, mx: "auto", py: 0, px:10, borderRadius: 4, marginTop: 4, backgroundColor:'whitesmoke', }}>
                 {isLoading ? (
                     <Grid container justifyContent="center">
                         <header className="loading">
@@ -186,12 +186,12 @@ const Create = (props) => {
                             </Grid>
                             <Grid 
                                 container 
-                                justifyContent="center"
+                                
                                 sx={{ 
                                     display: 'flex', 
                                     alignItems: 'center', 
                                     m: 1,
-                                    marginTop: 4
+                                    
                                 }}
                             >
                                 <Paper
@@ -200,8 +200,8 @@ const Create = (props) => {
                                         p: '2px 4px', 
                                         display: 'flex', 
                                         alignItems: 'center', 
-                                        backgroundColor: 'rgb(150, 144, 144)',
-                                        width: 450, 
+                                        backgroundColor: 'whitesmoke',
+                                       
                                         marginTop: 1
                                     }}
                                 >  
@@ -219,12 +219,12 @@ const Create = (props) => {
                             </Grid>
                             <Grid 
                                 container 
-                                justifyContent="center"
+                                
                                 sx={{ 
                                     display: 'flex', 
                                     alignItems: 'center', 
                                     m: 1,
-                                    marginTop: 4
+                                    
                                 }}
                             >
                                 <Paper
@@ -233,9 +233,9 @@ const Create = (props) => {
                                         p: '2px 4px', 
                                         display: 'flex', 
                                         alignItems: 'center', 
-                                        backgroundColor: 'rgb(150, 144, 144)',
-                                        width: 500, 
-                                        marginTop: 4
+                                        backgroundColor:'whitesmoke',
+                                         
+                                        marginTop: 1
                                     }}
                                 >  
                                     <label>Owner's address：</label>
@@ -263,12 +263,12 @@ const Create = (props) => {
                             </Grid>
                             <Grid 
                                 container 
-                                justifyContent="center"
+                               
                                 sx={{ 
                                     display: 'flex', 
                                     alignItems: 'center', 
                                     m: 1,
-                                    marginTop: 4
+                                   
                                 }}
                             >
                                 <Paper
@@ -277,7 +277,7 @@ const Create = (props) => {
                                         p: '2px 4px', 
                                         display: 'flex', 
                                         alignItems: 'center', 
-                                        backgroundColor: 'rgb(150, 144, 144)',
+                                        backgroundColor: 'whitesmoke',
                                         width: 450, 
                                         marginTop: 1
                                     }}
@@ -303,7 +303,7 @@ const Create = (props) => {
                                 display: 'flex', 
                                 alignItems: 'center', 
                                 m: 1,
-                                marginTop: 4
+                               
                             }}
                         >
                             <ActionButton buttonName="Create" color="error" clickAction={createAction} />

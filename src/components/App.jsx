@@ -1,5 +1,6 @@
 // mui関連をインポートする。
 import StartIcon from '@mui/icons-material/Start';
+import PersonIcon from '@mui/icons-material/Person';
 import AppBar from '@mui/material/AppBar';
 import GlobalStyles from '@mui/material/GlobalStyles';
 import IconButton from '@mui/material/IconButton';
@@ -40,6 +41,10 @@ import { EthereumPrivateKeyProvider } from "@web3auth/ethereum-provider";
 import { WALLET_ADAPTERS } from "@web3auth/base";
 import { Web3AuthNoModal } from "@web3auth/no-modal";
 import { userexist } from './hooks/UseContract';
+import LockIcon from '@mui/icons-material/Lock';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+
 /**
  * Appコンポーネント
  */
@@ -50,6 +55,25 @@ function App() {
     setCurrentAccount,
  
 } = useMyContext();
+
+const [anchorEl, setAnchorEl] = useState(null);
+// メニュー用の変数
+const open = Boolean(anchorEl);
+
+/**
+ * メニューアイコンをクリックした時の処理
+ * @param {*} event イベントハンドラ
+ */
+const handleClick = (event) => {
+      setAnchorEl(event.currentTarget);
+};
+
+/**
+ * メニューバーを閉じる時の処理
+ */
+const handleClose = () => {
+      setAnchorEl(null);
+};
 
   // const [data, setdata] = useState({
   //   address: "",
@@ -385,7 +409,7 @@ useEffect(()=>{
       <Router>
         <div sx={{ flexGrow: 1 }}>
           { /* 画面上部に表示するAppBarコンポーネント */ }
-          <AppBar position="static" color="transparent">
+          <AppBar position="static" sx={{backgroundColor:'whitesmoke'}}>
             <Toolbar>
               <Typography variant="h6" color="black" sx={{ flexGrow: 1 }}>
                 <strong>IDQ | Soul Wallet</strong>
@@ -404,15 +428,43 @@ useEffect(()=>{
                 ) :
                   /* 各画面に遷移するためのWeb3Menuコンポーネントを表示する。 */
                 <div className='dis'>
+                  
+                  <IconButton 
+aria-label="more"
+id="user-menu-button"
+aria-controls={open ? 'user-menu-button' : undefined}
+aria-expanded={open ? 'true' : undefined}
+aria-haspopup="true"
+onClick={handleClick}
+>
+<PersonIcon/>
+</IconButton>
+<Menu
+id="user-menu"
+MenuListProps={{
+      'aria-labelledby': 'user-menu-button',
+}}
+anchorEl={anchorEl}
+open={open}
+onClose={handleClose}
+PaperProps={{
+      style: {
+     
+      width: '20ch',
+      },
+}}
+>
+
+<MenuItem  onClick={handleClose}>{currentAccount}</MenuItem>
+<MenuItem  onClick={async ()=>{
+
+await web3auth.logout({cleanup: true});
+web3auth.clearCache();
+setCurrentAccount(null)
+}}><LockIcon/></MenuItem>
+</Menu>
                   <Web3Menu/>
-                  <button type='' onClick={async ()=>{   
-                                         
-                                         await web3auth.logout({cleanup: true});
-                                         web3auth.clearCache();
-                                         setCurrentAccount(null)}}
-                  >
-                        logout
-                  </button>
+ 
                 </div>
                 }
               </Typography>

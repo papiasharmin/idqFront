@@ -323,6 +323,11 @@ const Home = (props) => {
                                     container 
                                     alignItems="center"
                                     justifyContent="center"
+                                    sx={{ 
+                                        backgroundColor: 'whitesmoke', 
+                                        borderRadius:'10px',
+                                        boxShadow:'5px 5px 15px gray'
+                                    }}
                                 >
                                     <div className="App-content">
                                         <p><strong>My Soul</strong></p>
