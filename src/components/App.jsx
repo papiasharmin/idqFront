@@ -135,7 +135,7 @@ const connect = async()=>{
   // }
   
   let web3auth= new Web3Auth({
-    clientId: "BNb8D2QLifj-8iSBY2EtMjpl8Qi1F8BFxx_HimYKCxlrtKRpVJ9VRydycSmHv75QsJijy7qyyV6xBDYLUWMW1eY", // Get your Client ID from the Web3Auth Dashboard
+    clientId: "BIa-f6T5jiSUFcujnPzZni7hSTti-zUpn3oh0Fl0cHDmtSZi17WeNLQHqC1Ai20BLuCvqcgUgd2t1vW68F9Vzwc",//"BNb8D2QLifj-8iSBY2EtMjpl8Qi1F8BFxx_HimYKCxlrtKRpVJ9VRydycSmHv75QsJijy7qyyV6xBDYLUWMW1eY"
     web3AuthNetwork: "testnet", // Web3Auth Network
     chainConfig,
     authMode:"WALLET",
