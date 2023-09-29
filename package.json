@@ -36,6 +36,7 @@
     "@blockcerts/blockcerts-verifier": "^1.56.0",
     "@blockcerts/cert-verifier-js": "^6.7.3",
     "@blocto/sdk": "^0.6.0",
+    "@decentralized-identity/ion-tools": "^1.1.4",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
     "@mui/icons-material": "^5.14.7",
