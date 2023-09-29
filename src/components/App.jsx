@@ -34,17 +34,12 @@ import QrCodeReader from './common/QrCodeReader';
 import QrCodeDialog from './common/QrCodeDialog';
 import ActionButton from './common/ActionButton';
 import { Web3Auth } from "@web3auth/modal";
-import { WalletConnectV2Adapter } from "@web3auth/wallet-connect-v2-adapter";
-import { WalletConnectModal } from "@walletconnect/modal";
- import { OpenloginAdapter } from "@web3auth/openlogin-adapter";
-import { EthereumPrivateKeyProvider } from "@web3auth/ethereum-provider";
-import { WALLET_ADAPTERS } from "@web3auth/base";
-import { Web3AuthNoModal } from "@web3auth/no-modal";
 import { userexist } from './hooks/UseContract';
 import LockIcon from '@mui/icons-material/Lock';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
+
 
 /**
  * Appコンポーネント
@@ -91,79 +86,7 @@ const handleClose = () => {
   /**
    * ウォレット接続ボタンを押した時の処理
    */
-  const connectWalletAction = async () => {
-  // let signer = await connectWallet();
-  // console.log('signer',signer)
-  //await connectWallet();
 
-  setCurrentAccount(); //"0x202E34b639EEE7377aB5d80606f933b8c9c7Bae6"
-  // try{
-  //   const MMSDK = new MetaMaskSDK({
-  //     useDeeplink: false,
-  //     communicationLayerPreference: "socket",
-  //  });
-  //  const ethereum = MMSDK.getProvider();
-    
-  //   console.log('MMSDK',MMSDK, ethereum)
-  // } catch (err) {
-  //   console.log(err)
-  // }
-  //     // Asking if metamask is already present or not
-  //     if (window.ethereum) {
-    
-  //       // res[0] for fetching a first wallet
-  //       window.ethereum
-  //         .request({ method: "eth_requestAccounts" })
-  //         .then((res) => accountChangeHandler(res[0]));
-  //     } else {
-  //       //let acc = await ethereum.request({ method: 'wallet_scanQRCode', params: [] });
-  //       //accountChangeHandler(acc)
-  //       alert("install metamask extension!!");
-  //       return;
-  //     }
-    
-    
-  //   // getbalance function for getting a balance in
-  //   // a right format with help of ethers
-  //   const getbalance = (address) => {
-    
-  //     // Requesting balance method
-  //     window.ethereum
-  //       .request({ 
-  //         method: "eth_getBalance", 
-  //         params: [address, "latest"] 
-  //       })
-  //       .then((balance) => {
-  //         // Setting balance
-  //         //console.log('balance', new ethers.formatEther(balance))
-  //         // setdata({
-  //         //   Balance: new ethers.formatEther(balance),
-  //         // });
-  //       });
-  //   };
-    
-  //   // Function for getting handling all events
-  //   const accountChangeHandler = (account) => {
-  //     // Setting an address data
-  //     setdata({
-  //       address: account,
-  //     });
-  //     //setCurrentAccount(account);//account
-  //     // Setting a balance
-  //     getbalance(account);
-  //   }
-   
-    // try {
-    //   // call createContractObject function
-    //   //const signer  = "0x202E34b639EEE7377aB5d80606f933b8c9c7Bae6";//await connectWallet(); //INSTEAD OF USING BLOCKTO CREAT AN ACOUNT IN  METAMAK AND USE IT 
-    //   //await connectWallet()
-    //   setCurrentAccount(signer);
-    // } catch (error) {
-    //   console.log(error);
-    // }
-  };
-
-  //setCurrentAccount("0xb8fAb188F71e3cF627161502112070CbAb595fd2")
   function createuser(user){
       setIsLoading(true);
    

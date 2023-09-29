@@ -1,40 +1,14 @@
 /**
  * スマートコントラクトやウォレット接続などのWeb3関連の処理をまとめたhookコンポーネントファイル
  */
-import BloctoSDK from '@blocto/sdk';
+
 //import Web3 from 'web3';
 import MultiSigWallet from './../../contracts/MultiSigWallet.json';
 import MyToken from './../../contracts/MyToken.json';
 import WalletFactory from './../../contracts/WalletFactoryV4.json';
 import { CHAIN_ID, CONTRACT_ADDRESS, MYTOKEN_ADDRESS, RPC_URL } from "./../common/Constant";
 import { ethers } from 'ethers';
-// import { Core } from '@walletconnect/core'
-// import { Web3Wallet } from '@walletconnect/web3wallet'
-// import AuthClient from '@walletconnect/auth-client'
-// import { buildApprovedNamespaces } from '@walletconnect/utils'
-// const core = new Core({
-//   projectId:"6df1086ec4c69b1400bf2426405b9a93"
-// })
 
-// const web3wallet = await Web3Wallet.init({
-//   core, // <- pass the shared `core` instance
-//   metadata: {
-//     name: 'IDQ Soul Wallet',
-//     description: 'web3wallet',
-//     url: 'www.walletconnect.com',
-//     icons: []
-//   }
-// })
-
-// console.log('WALLETCONNET',web3wallet.core.crypto.generateKeyPair())
-/**
- * getProvider メソッド
- */
-// export const getProvider = () => {
-//       // get provider
-//       const provider = new Web3(`https://polygon-mumbai.g.alchemy.com/v2/EgiLkcIuRCG4PwoZiyRTVkYMcZrT8ynP`);
-//       return provider;
-// };
 
 /**
  * createContractObject メソッド
@@ -48,9 +22,6 @@ const createContractObject = ( contractAbi, contractAddress) => {
 
       let provider = new ethers.providers.JsonRpcProvider(RPC_URL);//new ethers.JsonRpcProvider(RPC_URL);
       let contract = new ethers.Contract(contractAddress, contractAbi, provider)
-
-      // let newobj = new ethers.JsonRpcProvider('https://rpc-evm-sidechain.xrpl.org');
-      // let conxrp = new ethers.Contract(contractAddress, contractAbi, newobj)
       
       return contract
 };
@@ -157,8 +128,8 @@ const createContractObject = ( contractAbi, contractAddress) => {
 export const getDid = async(signer) => {
       // call createContractObject メソッド
       const FactoryContract = createContractObject(WalletFactory.abi, CONTRACT_ADDRESS);
-       //console.log('DIDFACTORY',await FactoryContract.getAddress())
-       const result = await FactoryContract.dids(signer) //await FactoryContract.methods.dids(signer).call();
+       
+       const result = await FactoryContract.dids(signer) 
        console.log('FACTORIDD', result)
       return result;
 };
@@ -172,7 +143,7 @@ export const getTokenBalanceOf = async(signer) => {
       // call createContractObject メソッド
       const MyTokenContract  = createContractObject(MyToken.abi, MYTOKEN_ADDRESS);
       // get token balance
-      const num = await MyTokenContract.balanceOf(signer)//await MyTokenContract.methods.balanceOf(signer).call();
+      const num = await MyTokenContract.balanceOf(signer)
  
       return Number(num);
 };
