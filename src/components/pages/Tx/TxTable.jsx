@@ -81,7 +81,7 @@ const TxTable = (props) => {
                     }
                     if(column.label === "To") {
                         return (
-                            <TableCell key={column.id} align={column.align}>
+                            <TableCell style={{color:'rgb(173, 84, 250)'}} key={column.id} align={column.align}>
                                 {row.to}
                             </TableCell>
                         );

@@ -108,7 +108,8 @@ const MyVC = (props) => {
                     mx: "auto", 
                     p: 0, 
                     borderRadius: 4, 
-                    marginTop: 4
+                    marginTop: 4,
+                    backgroundColor:'whitesmoke',boxShadow:'5px 5px 15px gray'
                 }}
             >
                 <Grid container justifyContent="center">

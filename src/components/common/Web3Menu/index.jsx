@@ -53,6 +53,7 @@ const Web3Menu = () => {
                         aria-expanded={open ? 'true' : undefined}
                         aria-haspopup="true"
                         onClick={handleClick}
+                        sx={{color:'black'}}
                   >
                         <MenuIcon/>
                   </IconButton>
@@ -64,17 +65,13 @@ const Web3Menu = () => {
                         anchorEl={anchorEl}
                         open={open}
                         onClose={handleClose}
-                        PaperProps={{
-                              style: {
-                              maxHeight: ITEM_HEIGHT * 4.5,
-                              width: '20ch',
-                              },
-                        }}
+                        style={{width:'120px'}}
+                        
                   >
                         {options.map((option) => (
-                              <MenuItem key={option} selected={option === 'Home'} onClick={handleClose}>
+                              <MenuItem style={{borderBottom:'1px solid rgb(16, 107, 199)', padding:'5px 15px'}} key={option} selected={option === 'Home'} onClick={handleClose}>
                                     {/* 各画面へのリンク */}
-                                    <NavLink className="navLink" to={{ pathname: `/${option}` }}>{option}</NavLink>
+                                    <NavLink style={{color:'dodgerblue', textDecoration:'none'}} to={{ pathname: `/${option}` }}>{option}</NavLink>
                               </MenuItem>
                         ))}
                   </Menu>

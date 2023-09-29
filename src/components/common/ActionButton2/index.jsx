@@ -13,7 +13,7 @@ const ActionButton2 = (props) => {
     // 描画する内容
     return (
         <Grid sx={{marginLeft: 'auto', marginRight: 'auto'}}>
-            <Button color={color} variant="outlined" sx={{borderRadius: 4}} onClick={clickAction}>
+            <Button color={color} variant="outlined" sx={{borderRadius: 4, fontWeight:'bold'}} onClick={clickAction}>
                 {buttonName}
             </Button>
         </Grid>

@@ -32,11 +32,11 @@ import MultiSigWallet from './../../../contracts/MultiSigWallet.json';
  */
 const columns = [
     { id: 'no', label: 'No.', minWidth: 20, align: 'center' },
-    { id: 'to', label: 'To', minWidth: 200, align: 'center' },
-    { id: 'value', label: 'Value', minWidth: 150, align: 'center'},
-    { id: 'approved', label: 'Approved', minWidth: 150, align: 'center'},
-    { id: 'status', label: 'Status', minWidth: 150, align: 'center'},
-    { id: 'actions', label: 'Actions', minWidth: 200, align: 'center'},
+    { id: 'to', label: 'To', minWidth: 150, align: 'center' },
+    { id: 'value', label: 'Value', minWidth: 80, align: 'center'},
+    { id: 'approved', label: 'Approved', minWidth: 80, align: 'center'},
+    { id: 'status', label: 'Status', minWidth: 80, align: 'center'},
+    { id: 'actions', label: 'Actions', minWidth: 100, align: 'center'},
 ];
 
 /** 
@@ -331,7 +331,7 @@ const Txs = (props) => {
 
     return(
         <MainContainer>
-            <StyledPaper sx={{my: 1, mx: "auto", p: 0, borderRadius: 4, marginTop: 4}}>
+            <StyledPaper sx={{my: 1, mx: "auto", p: 0, borderRadius: 4, marginTop: 4, backgroundColor:'whitesmoke',boxShadow:'5px 5px 15px gray'}}>
                 {isLoading ? (
                     <Grid container justifyContent="center">
                         <header className="loading">
@@ -362,7 +362,7 @@ const Txs = (props) => {
                                             display: 'flex', 
                                             alignItems: 'center', 
                                             m: 1,
-                                            marginTop: 4
+                                         
                                         }}
                                     >
                                         <Paper
@@ -371,7 +371,7 @@ const Txs = (props) => {
                                                 p: '2px 4px', 
                                                 display: 'flex', 
                                                 alignItems: 'center', 
-                                                backgroundColor: 'rgb(150, 144, 144)',
+                                                backgroundColor: 'whitesmoke',
                                                 width: 450, 
                                                 marginTop: 1
                                             }}
@@ -395,7 +395,7 @@ const Txs = (props) => {
                                             display: 'flex', 
                                             alignItems: 'center', 
                                             m: 1,
-                                            marginTop: 4
+                                           
                                         }}
                                     >
                                         <Paper
@@ -404,7 +404,7 @@ const Txs = (props) => {
                                                 p: '2px 4px', 
                                                 display: 'flex', 
                                                 alignItems: 'center', 
-                                                backgroundColor: 'rgb(150, 144, 144)',
+                                                backgroundColor: 'whitesmoke',
                                                 width: 450, 
                                                 marginTop: 1
                                             }}
@@ -430,11 +430,11 @@ const Txs = (props) => {
                                         display: 'flex', 
                                         alignItems: 'center', 
                                         m: 1,
-                                        marginTop: 4
+                                        
                                     }}
                                 >
-                                    <ActionButton buttonName="Create" color="error" clickAction={createAction} />
-                                    <ActionButton buttonName="back" color="primary" clickAction={(e) => {setCreateFlg(false)}} />
+                                    <ActionButton buttonName="Create" color="primary" clickAction={createAction} />
+                                    <ActionButton buttonName="back" color="secondary" clickAction={(e) => {setCreateFlg(false)}} />
                                 </Grid>
                             </>
                         ) : (
@@ -451,7 +451,7 @@ const Txs = (props) => {
                                         <p><strong>Transaction Info</strong></p>
                                     </Grid>
                                 </Grid>
-                                <TableContainer sx={{ maxHeight: 600 }}>
+                                <TableContainer sx={{ maxHeight: 600, fontSize:'18px', fontWeight: 400}}>
                                     <Table stickyHeader aria-label="sticky table">
                                         <TableHead>
                                             <TableRow>
@@ -502,7 +502,7 @@ const Txs = (props) => {
                                         marginTop: 4
                                     }}
                                 >
-                                    <ActionButton buttonName="Create Transaction" color="error" clickAction={(e) => {setCreateFlg(true)}} />
+                                    <ActionButton buttonName="Create Transaction" color="primary" clickAction={(e) => {setCreateFlg(true)}} />
                                 </Grid>
                             </>
                         ) }

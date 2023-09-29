@@ -44,6 +44,7 @@ import { userexist } from './hooks/UseContract';
 import LockIcon from '@mui/icons-material/Lock';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
+import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 
 /**
  * Appコンポーネント
@@ -402,6 +403,17 @@ useEffect(()=>{
 
 
 },[currentAccount])
+
+const copy = () => {
+  //コピー
+  navigator.clipboard.writeText(currentAccount)
+      .then(function() {
+          console.log('Async: Copyed to clipboard was successful!');
+          alert("Copying to clipboard was successful!")
+      }, function(err) {
+          console.error('Async: Could not copy text: ', err);
+      });
+};
   
   return (
     <>
@@ -422,6 +434,7 @@ useEffect(()=>{
                     id="connect-wallet"
                     aria-haspopup="true"
                     onClick={connect}
+                    sx={{color:'black'}}
                   >
                     <StartIcon />
                   </IconButton>
@@ -436,6 +449,7 @@ aria-controls={open ? 'user-menu-button' : undefined}
 aria-expanded={open ? 'true' : undefined}
 aria-haspopup="true"
 onClick={handleClick}
+sx={{color:'black'}}
 >
 <PersonIcon/>
 </IconButton>
@@ -455,7 +469,7 @@ PaperProps={{
 }}
 >
 
-<MenuItem  onClick={handleClose}>{currentAccount}</MenuItem>
+<MenuItem sx={{fontSize:'12px'}}>{'Addr:'+ currentAccount.substr(0,12) + '...'}<ContentCopyIcon className='pointer' fontSize="small" onClick={copy}/></MenuItem>
 <MenuItem  onClick={async ()=>{
 
 await web3auth.logout({cleanup: true});
@@ -478,7 +492,7 @@ setCurrentAccount(null)
                 <img src={logo} width={'100px'} alt="logo" />
               </div>
 
-                <ActionButton buttonName="Connectwallet" color="secondary" clickAction={connect} />
+                <ActionButton buttonName="Connect Wallet" color="secondary" clickAction={connect} />
               </div>
             </header>
           ) : (

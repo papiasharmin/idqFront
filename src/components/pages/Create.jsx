@@ -72,7 +72,9 @@ const Create = (props) => {
      */
     const createAction = async() => {
         console.log("owners:", owners);
- 
+         if(owners.length <2){
+            prompt('Must add al least two owners');
+         }
          try {
             setIsLoading(true);
             //createWalletを使うためのAPIを呼び出す。(引数に課題あり)
@@ -123,7 +125,7 @@ const Create = (props) => {
            return arr;
         });
         // ステート変数を更新する。
-        //setOwner('');
+        setOwner(null);
         alert("アドレス追加完了！");
     };
 
@@ -163,7 +165,7 @@ const Create = (props) => {
 
     return(
         <MainContainer>
-            <StyledPaper justifyContent="center" sx={{my: 1, mx: "auto", py: 0, px:10, borderRadius: 4, marginTop: 4, backgroundColor:'whitesmoke', }}>
+            <StyledPaper justifyContent="center" sx={{width: '50%', my: 1, mx: "auto", py: 0, px:10, borderRadius: 4, marginTop: 4, backgroundColor:'whitesmoke',boxShadow:'5px 5px 15px gray'}}>
                 {isLoading ? (
                     <Grid container justifyContent="center">
                         <header className="loading">
@@ -252,12 +254,12 @@ const Create = (props) => {
                                     />
                                     <Button 
                                         onClick={addAddress} 
-                                        sx={{ margin: 1}} 
+                                        sx={{ margin: 1, width:'20px'}} 
                                         variant="contained" 
                                         color="inherit" 
                                         className="cta-button"
                                     > 
-                                        + 
+                                        Add
                                     </Button>
                                 </Paper>
                             </Grid>
@@ -306,7 +308,7 @@ const Create = (props) => {
                                
                             }}
                         >
-                            <ActionButton buttonName="Create" color="error" clickAction={createAction} />
+                            <ActionButton buttonName="Create" color="primary" clickAction={createAction} />
                         </Grid>
                     </>
                 )}

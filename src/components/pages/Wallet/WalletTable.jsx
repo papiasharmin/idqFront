@@ -21,7 +21,9 @@ const WalletTable = (props) => {
         _columns, 
         row, 
         index, 
-        depositAction, 
+        depositAction,
+        showdetail,
+        setdetail
     } = props;
 
     // ウォレットの名前を格納するステート変数
@@ -42,24 +44,23 @@ const WalletTable = (props) => {
     /**
      * initialization
      */
-    const init = async(_wallet) => {
+    const init = async(wallet) => {
         // ウォレットコントラクトの各情報を取得する。
-        const { 
-            wName,
-            required,
-            counts,
-            ownersaddr,
-             balance
+    //     const { 
+    //         wName,
+    //         required,
+    //         counts,
+    //         ownersaddr,
+    //          balance
             
-        } = await getWalletInfo(_wallet);
+    //     } = await getWalletInfo(wallet);
         
-        // ステート変数に格納する。
-        console.log('walletinfoprob',required,counts)
-        setName(wName);
-        setAddr(_wallet);
-        setOwnerCounts(counts);
-        setReq(required);
-        setAsset(balance)
+    //     // ステート変数に格納する。
+    //     console.log('walletinfoprob',required,counts)
+    //    setdetail({wName, required,counts,balance, wallet})
+        setAddr(wallet);
+        
+     
     };
 
     // 副作用フック
@@ -75,60 +76,38 @@ const WalletTable = (props) => {
                 // カラムの値により、セットする値を変更する。
                 if(column.label === "No.") {
                     return (
-                        <TableCell key={column.id} align={column.align}>
+                        <TableCell style={{fontSize:'18px', fontWeight: 400}} key={column.id} align={column.align}>
                             {index + 1}
                         </TableCell>
                     );
                 }
                 if(column.label === "Address") {
                     return (
-                        <TableCell key={column.id} align={column.align}>
-                            <Link to={"/txs"} state={toTx}>
-                                {_wallet}
-                            </Link>
+                        <TableCell style={{color: 'rgb(173, 84, 250)', fontSize:'18px'}}key={column.id} align={column.align}>
+                            {_wallet}
                         </TableCell>
                     );
                 }
-                if(column.label === "Asset") {
+                if(column.label === "Detail") {
                     return (
                         <TableCell key={column.id} align={column.align}>
-                            {asset}
+                           <ActionButton2 buttonName="detail" color="primary" clickAction={()=>{setdetail(_wallet)
+                            showdetail(true)}} />
                         </TableCell>
                     )
                 } 
-                /* NameとStatusについては個別に条件が異なってくるので別関数で条件を整理して描画する。 */
-                if(column.label === "Name") {
-                    return (
-                        <TableCell key={column.id} align={column.align}>
-                            {name}
-                        </TableCell>
-                    )
-                } 
-                if(column.label === "Owners") {
-                    console.log('ownerCounts',ownerCounts)
-                    return (
-                        <TableCell key={column.id} align={column.align}>
-                            {ownerCounts}
-                        </TableCell>
-                    )
-                }   
-                if(column.label === "Required") {
-                    return (
-                        <TableCell key={column.id} align={column.align}>
-                           {req}
-                        </TableCell>
-                    )
-                }    
                 if(column.label === "Deposit") {
                     return (
                         <TableCell key={column.id} align={column.align}>
                            <ActionButton2 buttonName="deposit" color="primary" clickAction={depositAction} />
                         </TableCell>
                     )
-                }        
+                }   
+    
             })}
         </TableRow>
-    );
+    )
+    
 };
 
 export default WalletTable;

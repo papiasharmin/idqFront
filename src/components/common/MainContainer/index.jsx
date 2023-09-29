@@ -8,7 +8,7 @@ import Grid from "@mui/material/Grid";
 const MainContainer = ({ children }) => {
       return(
             <Grid container direction="row" justifyContent="center" alignItems="center">
-                  <Box sx={{ flexGrow: 1, overflow: "hidden", px: 3, mt: 10,  height: '80vh' }} >
+                  <Box sx={{ flexGrow: 1, overflow: "auto", px: 3, mt: 5,   }} >
                         {children}
                   </Box>
             </Grid>

@@ -297,6 +297,7 @@ const Home = (props) => {
                     />
                     {/* QrCodeDialog */}
                     <QrCodeDialog
+                        tag={'My DID'}
                         open={qrOpen}
                         did={fullDid}
                         handleClose={(e) => {handleQrClose()}} 
@@ -369,7 +370,7 @@ const Home = (props) => {
                         </div>
                     )}
                     {/* 画面の幅が一定以下になった際には下部に遷移用のリンクを表示する。 */}
-                    {width < WIDTH_THRESHOLD && <GroupButtons/>}
+                    
                 </MainContainer>
             )}
         </>

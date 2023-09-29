@@ -16,6 +16,7 @@ import './QrCodeDialog.css';
 const QrCodeDialog = (props) => {
       // 引数から値を取得する。
       const { 
+            tag,
             open, 
             did,
             handleClose, 
@@ -29,7 +30,7 @@ const QrCodeDialog = (props) => {
                         aria-labelledby="form-dialog-title"
                   >
                         <DialogTitle id="form-dialog-title">
-                              My DID 
+                              {tag}
                         </DialogTitle>
                         <DialogContent >
                               <DialogContentText>

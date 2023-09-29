@@ -1,7 +1,9 @@
 // mui関連のコンポーネントのインポート
 import Grid from "@mui/material/Grid";
+import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import Paper from "@mui/material/Paper";
 import { styled } from "@mui/material/styles";
+import QrCodeIcon from '@mui/icons-material/QrCode';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -11,7 +13,7 @@ import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import React, { useEffect, useState } from "react";
 import superAgent from 'superagent';
-
+import ActionButton from "../../common/ActionButton";
 import WalletDialog from '../../common/Dialog';
 import LoadingIndicator from '../../common/LoadingIndicator';
 import './../../../assets/css/App.css';
@@ -24,6 +26,8 @@ import {
     getWallets, walletsCount, getWalletInfo, getRequired, getTxs
 } from './../../hooks/UseContract';
 import WalletTable from './WalletTable';
+import { Link } from "react-router-dom";
+import QrCodeDialog from "../../common/QrCodeDialog";
 
 
 /**
@@ -31,12 +35,10 @@ import WalletTable from './WalletTable';
  */
 const columns = [
     { id: 'no', label: 'No.', minWidth: 20, align: 'center' },
-    { id: 'address', label: 'Address', minWidth: 200, align: 'center' },
-    { id: 'asset', label: 'Asset', minWidth: 100, align: 'center' },
-    { id: 'name', label: 'Name', minWidth: 100, align: 'center'},
-    { id: 'owners', label: 'Owners', minWidth: 100, align: 'center'},
-    { id: 'required', label: 'Required', minWidth: 100, align: 'center'},
-    { id: 'deposit', label: 'Deposit', minWidth: 150, align: 'center'},
+    { id: 'address', label: 'Address', minWidth: 150, align: 'center' },
+    { id: 'detail', label: 'Detail', minWidth: 100, align: 'center'},
+    { id: 'deposit', label: 'Deposit', minWidth: 100, align: 'center'},
+
 ];
 
 /** 
@@ -69,6 +71,7 @@ const Wallets = (props) => {
     const [rowsPerPage, setRowsPerPage] = useState(10);
     // ローディングを表示するためのフラグ
     const [isLoading, setIsLoading] = useState(false);
+    const [isLoadingdetail, setIsLoadingdetail] = useState(false);
     // トランザクションが正常に処理された場合のフラグ
     const [successFlg, setSuccessFlg] = useState(false);
     // トランザクションが異常終了した場合のフラグ
@@ -81,6 +84,10 @@ const Wallets = (props) => {
     const [depositAddr, setDepositAddr] = useState(null);
     // depozit amount
     const [amount, setAmount] = useState(0);
+    const [showWalletDetails, setShowWalletDetails] = useState(false);
+    const [walletDetails, setWalletDetails] = useState(false);
+    const [qrOpen, setQrOpen] = useState(false);
+
 
     /**
      * コンポーネントが描画されたタイミングで実行する初期化関数
@@ -174,6 +181,17 @@ const Wallets = (props) => {
         setOpen(false);
     }
 
+    const handleQrOpen = (wallet) => {
+        setQrOpen(true);
+    }
+
+    /**
+     * Close Dialog
+     */
+    const handleQrClose = () => {
+        setQrOpen(false);
+    }
+
     /**
      * ページングするための関数
      * @param e イベント内容
@@ -190,6 +208,42 @@ const Wallets = (props) => {
     const handleChangeRowsPerPage = (e) => {
         setRowsPerPage(e.target.value);
         setPage(0);
+    };
+
+    const getwalletDetails = async(wallet)=>{
+        setIsLoadingdetail(true)
+        const { 
+            wName,
+            required,
+            counts,
+            ownersaddr,
+             balance
+            
+        } = await getWalletInfo(wallet);
+        if(wName){
+            setIsLoadingdetail(false)
+        }
+
+        setWalletDetails({
+            wName,
+            required,
+            counts,
+            ownersaddr,
+             balance,
+             wallet
+        })
+  
+    }
+
+    const copy = () => {
+        //コピー
+        navigator.clipboard.writeText(walletDetails.wallet)
+            .then(function() {
+                console.log('Async: Copyed to clipboard was successful!');
+                alert("Copying to clipboard was successful!")
+            }, function(err) {
+                console.error('Async: Could not copy text: ', err);
+            });
     };
 
     /**
@@ -234,7 +288,7 @@ const Wallets = (props) => {
     }, [account]);
 
     return(
-        <MainContainer>
+        <MainContainer >
             { /* Dialog */ } 
             <WalletDialog 
                 open={open} 
@@ -244,7 +298,7 @@ const Wallets = (props) => {
                 setAmountAction={(e) => {setAmount(e.target.value)}} 
             />
             { /* main content */ }
-            <StyledPaper sx={{my: 1, mx: "auto", p: 0, borderRadius: 4, marginTop: 4}}>
+            <StyledPaper sx={{my: '10px', mx: "auto", p: 0, borderRadius: 4, marginTop: 4, backgroundColor:'whitesmoke',boxShadow:'5px 5px 15px gray'}}>
                 {isLoading ? (
                     <Grid container justifyContent="center">
                         <header className="loading">
@@ -275,7 +329,7 @@ const Wallets = (props) => {
                                 </Grid>
                                 <TableContainer sx={{ maxHeight: 600 }}>
                                     <Table stickyHeader aria-label="sticky table">
-                                        <TableHead>
+                                        <TableHead sx={{backgroundColor:'black', color:'white'}}>
                                             <TableRow>
                                                 {columns.map((column) => (
                                                     <TableCell key={column.id} align={column.align} style={{ minWidth: column.minWidth }}>
@@ -298,6 +352,8 @@ const Wallets = (props) => {
                                                             depositAction={(e) => {
                                                                 handleOpen(row)
                                                             }}
+                                                            showdetail={setShowWalletDetails}
+                                                            setdetail={getwalletDetails}
                                                         />);
                                             })}
                                         </TableBody>
@@ -317,6 +373,65 @@ const Wallets = (props) => {
                     </>
                 )}
             </StyledPaper>
+            <QrCodeDialog
+                        tag={'Mulltisig Wallet Address'}
+                        open={qrOpen}
+                        did={walletDetails.wallet}
+                        handleClose={(e) => {handleQrClose()}} 
+                    />
+            {showWalletDetails && 
+                    <StyledPaper 
+                    sx={{
+                        my: 1, 
+                        mx: "auto", 
+                        mb:1,
+                        p: 0,  
+                        padding: "5px 10px",
+                        marginTop: 4,
+                        backgroundColor: 'whitesmoke', 
+                        borderRadius:'10px',
+                        boxShadow:'5px 5px 15px gray',
+                        width:'70%',
+                        
+                    }}
+                >
+                    {isLoadingdetail ? (
+                        <Grid container justifyContent="center">
+                            <div className="loading">
+                                <p><LoadingIndicator/></p>
+                                <h3>Please Wait・・・・</h3>
+                            </div>
+                        </Grid>
+                    ) : ( 
+                        <>
+                            <Grid 
+                                container 
+                                alignItems="center"
+                                justifyContent="center"
+                                sx={{width:'100%'}}
+                                
+                            >
+                                <div style={{padding:'10px 20px'}}>
+                                    <p style={{fontSize:'20px', fontWeight:400, color:'dodgerblue'}}>{`${walletDetails.wName} Deatils`}</p>
+                                    <p style={{backgroundColor:'skyblue', padding:'10px', color:'white',width:'40%', borderRadius:'5px'}}>EVM XRP Sidechain</p>
+                                    <p><span style={{color:'#c344fa', fontSize:'18px'}}>Address</span> : { `${walletDetails.wallet}`}</p>
+                                    <div style={{display:'flex', justifyContent:'center',alignContent:'center', gap:'20px', border:'1px solid gray',padding:'5px', width:'25%'}}>
+                                    <ContentCopyIcon className='pointer' fontSize="small" onClick={copy}/>
+                                     <QrCodeIcon onClick={handleQrOpen}/>
+                                    </div>
+                                    <p><span style={{color:'#c344fa', fontSize:'18px'}}>Required</span> : {`${walletDetails.required}/${walletDetails.counts}`}</p>
+                                    <p><span style={{color:'#c344fa', fontSize:'18px'}}>Total Balance</span> : {`${walletDetails.balance} XRP`}</p>
+                                    
+                                    <Link to={"/txs"} state={{addr: walletDetails.wallet}} style={{borderRadius:'5px',textDecoration:'none',backgroundColor:'#c344fa',color:'white', padding:'10px',width:'50%', fontSize:'18px', fontWeight:400}}>
+                                        Transactions
+                                    </Link>
+                                </div>   
+                          
+                            </Grid>
+                        </>
+                    )}
+                </StyledPaper>
+            }
             {successFlg && (
                 /* 成功時のポップアップ */
                 <div id="toast" className={showToast ? "zero-show" : ""}>
