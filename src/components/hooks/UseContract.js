@@ -16,6 +16,11 @@ import { ethers } from 'ethers';
  * @param contractAddress コントラクトアドレス
  */
 
+export const getProvider= () =>{
+      let provider = new ethers.providers.JsonRpcProvider(RPC_URL);
+      return provider;
+}
+
 console.log('CHAIN',CHAIN_ID,RPC_URL)
 const createContractObject = ( contractAbi, contractAddress) => {
       // get provider

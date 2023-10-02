@@ -22,6 +22,7 @@ import QrCodeReader from './../common/QrCodeReader';
 import {
     getDid, getRegisterStatus, getTokenBalanceOf
 } from './../hooks/UseContract';
+import { Link } from "react-router-dom";
 
 /** 
  * StyledPaperコンポーネント
@@ -302,6 +303,7 @@ const Home = (props) => {
                         did={fullDid}
                         handleClose={(e) => {handleQrClose()}} 
                     />
+
                     <StyledPaper 
                         sx={{
                             my: 1, 
@@ -334,6 +336,21 @@ const Home = (props) => {
                                         <p><strong>My Soul</strong></p>
                                         {isRegistered ? (
                                             <>
+                                                <Grid
+                                                    container
+                                                    direction="row"
+                                                    justifyContent="center"
+                                                    alignItems="center"
+                                                    flex={true}
+                                                >
+                                                    <Link to={"/SwapToken"} style={{borderRadius:'5px',textDecoration:'none',backgroundColor:'#c344fa',color:'white', padding:'10px',width:'50%', fontSize:'18px', fontWeight:400}}>
+                                                        Swap Token
+                                                    </Link>
+                                                    <Link to={"/Buy"} style={{borderRadius:'5px',textDecoration:'none',backgroundColor:'#c344fa',color:'white', padding:'10px',width:'50%', fontSize:'18px', fontWeight:400}}>
+                                                        Buy Token
+                                                    </Link>
+
+                                                </Grid>
                                                 <p>Your DID:{did} <ContentCopyIcon className='pointer' fontSize="small" onClick={copy}/></p>
                                                 <p>Your Token:{balance}</p>
                                                 <Grid

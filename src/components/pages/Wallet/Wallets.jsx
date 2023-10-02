@@ -87,7 +87,7 @@ const Wallets = (props) => {
     const [showWalletDetails, setShowWalletDetails] = useState(false);
     const [walletDetails, setWalletDetails] = useState(false);
     const [qrOpen, setQrOpen] = useState(false);
-
+    const [deposite,setdeposite] = useState(false)
 
     /**
      * コンポーネントが描画されたタイミングで実行する初期化関数
@@ -146,7 +146,8 @@ const Wallets = (props) => {
                         return err;
                     }
                 });
-
+            
+            setdeposite(true)
             setDepositAddr("");
             setAmount(0);
             setIsLoading(false);
@@ -286,6 +287,10 @@ const Wallets = (props) => {
         init();
         setIsLoading(false);
     }, [account]);
+
+    useEffect(()=>{
+        
+    },[deposite])
 
     return(
         <MainContainer >

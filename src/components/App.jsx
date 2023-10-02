@@ -26,6 +26,7 @@ import Upload from './pages/Upload';
 import MyVC from './pages/Vc/MyVc';
 import Verify from './pages/Verify';
 import Wallets from './pages/Wallet/Wallets';
+import Example from './pages/SwapToken';
 import { ethers } from 'ethers';
 import logo from '../assets/imgs/logo.png'
 import superAgent from 'superagent';
@@ -288,6 +289,7 @@ setCurrentAccount(null)
               <Route path="/upload" exact element={ <Upload /> } />
               <Route path="/verify" exact element={ <Verify/> } />
               <Route path="/tips" exact element={ <Tips/> } />
+              <Route path="/swaptoken" exact element={ <Example/> } />
               <Route path="*" exact element={ <NoPage/> } />
             </Routes>
            
